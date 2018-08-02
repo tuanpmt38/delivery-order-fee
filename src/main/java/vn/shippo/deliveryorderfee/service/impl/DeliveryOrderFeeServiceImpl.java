@@ -1,8 +1,8 @@
-package deliveryorderfees.service.impl;
+package vn.shippo.deliveryorderfee.service.impl;
 
-import deliveryorderfees.model.DeliveryOrderFee;
-import deliveryorderfees.repository.DeliveryOrderFeeRepository;
-import deliveryorderfees.service.DeliveryOrderFeeService;
+import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
+import vn.shippo.deliveryorderfee.repository.DeliveryOrderFeeRepository;
+import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

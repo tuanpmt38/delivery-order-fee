@@ -1,4 +1,4 @@
-package deliveryorderfees;
+package vn.shippo.deliveryorderfee;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DeliveryOrderFeeApplication implements ApplicationRunner {
 
 	private static final Logger logger = LogManager.getLogger(DeliveryOrderFeeApplication.class);
-
 
 	public static void main(String[] args) {
 		SpringApplication.run(DeliveryOrderFeeApplication.class, args);

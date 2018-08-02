@@ -1,6 +1,6 @@
-package deliveryorderfees.service;
+package vn.shippo.deliveryorderfee.service;
 
-import deliveryorderfees.model.DeliveryOrderFee;
+import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 
 import java.util.List;
 import java.util.Optional;

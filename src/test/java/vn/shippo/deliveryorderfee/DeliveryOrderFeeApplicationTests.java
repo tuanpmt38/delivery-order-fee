@@ -1,4 +1,4 @@
-package deliveryorderfees;
+package vn.shippo.deliveryorderfee;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

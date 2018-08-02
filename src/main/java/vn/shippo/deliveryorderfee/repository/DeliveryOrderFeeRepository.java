@@ -1,7 +1,7 @@
-package deliveryorderfees.repository;
+package vn.shippo.deliveryorderfee.repository;
 
 
-import deliveryorderfees.model.DeliveryOrderFee;
+import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

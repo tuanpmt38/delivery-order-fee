@@ -1,8 +1,8 @@
-package deliveryorderfees.controller;
+package vn.shippo.deliveryorderfee.controller;
 
 
-import deliveryorderfees.model.DeliveryOrderFee;
-import deliveryorderfees.service.DeliveryOrderFeeService;
+import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
+import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,8 +38,11 @@ public class DeliveryOderFeeController {
         return new ResponseEntity<List<DeliveryOrderFee>>(deliveryOrderFees, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public ResponseEntity<Void> createCustomer(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = "application/json")
+    public DeliveryOrderFee createDeliveryOrderFee (@Valid @RequestBody DeliveryOrderFee deliveryOrderFee){
+        return deliveryOrderFeeService.save(deliveryOrderFee);
+    }
+    public ResponseEntity<Void> createDeliveryOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
         deliveryOrderFeeService.save(deliveryOrderFee);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/deliveryorderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
@@ -46,18 +50,14 @@ public class DeliveryOderFeeController {
     }
 
 //    @RequestMapping(value = "/create", method = RequestMethod.POST)
-//    public ResponseEntity<Void> createCustomer(@RequestBody DeliveryOrderFee deliveryOrderFee) {
+//    public ResponseEntity<DeliveryOrderFee> createDeliveryOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee) {
 //
 //        DeliveryOrderFee deliveryOrderFeeSave = deliveryOrderFeeService.save(deliveryOrderFee);
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                .buildAndExpand(deliveryOrderFeeSave.getId()).toUri();
-//
-//        return ResponseEntity.created(location).build();
-//
+//        return new ResponseEntity<DeliveryOrderFee>(deliveryOrderFee, HttpStatus.CREATED);
 //    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<DeliveryOrderFee> getDeliveryOrderFee(@PathVariable("id") Integer id){
+    public Optional<DeliveryOrderFee> getDeliveryOrderFeeById(@PathVariable("id") Integer id){
         Optional<DeliveryOrderFee> deliveryOrderFee = deliveryOrderFeeService.findById(id);
         if(deliveryOrderFee.isPresent()){
             DeliveryOrderFee deliveryOrderFees = deliveryOrderFee.get();
