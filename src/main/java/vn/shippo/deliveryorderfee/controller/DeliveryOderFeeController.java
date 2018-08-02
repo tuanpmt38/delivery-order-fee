@@ -3,14 +3,15 @@ package vn.shippo.deliveryorderfee.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/deliveryOrderFee")
@@ -30,4 +31,23 @@ public class DeliveryOderFeeController {
         }
         return new ResponseEntity<List<DeliveryOrderFee>>(deliveryOrderFees, HttpStatus.OK);
     }
+
+//    @RequestMapping(value = "/create", method = RequestMethod.POST)
+//    public ResponseEntity<Void> createCustomer(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
+//        deliveryOrderFeeService.save(deliveryOrderFee);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setLocation(ucBuilder.path("/deliveryOrderFee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
+//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Optional<DeliveryOrderFee> getDeliveryOrderFee(@PathVariable("id") Integer id){
+        Optional<DeliveryOrderFee> deliveryOrderFee = deliveryOrderFeeService.findById(id);
+        if(deliveryOrderFee.isPresent()){
+            DeliveryOrderFee deliveryOrderFees = deliveryOrderFee.get();
+        }
+        return deliveryOrderFee;
+    }
+
+
 }

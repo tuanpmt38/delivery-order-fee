@@ -7,6 +7,7 @@ import vn.shippo.deliveryorderfee.repository.DeliveryOrderFeeRepository;
 import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
@@ -20,6 +21,11 @@ public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
     @Override
     public List<DeliveryOrderFee> findAll() {
         return (List<DeliveryOrderFee>) deliveryOrderFeeRepository.findAll();
+    }
+
+    @Override
+    public Optional<DeliveryOrderFee> findById(Integer id) {
+        return deliveryOrderFeeRepository.findById(id);
     }
 
     @Override
