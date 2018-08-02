@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DeliveryOrderFeeService {
 
-    List<DeliveryOrderFee> getAll();
+    List<DeliveryOrderFee> findAll();
 
     void save(DeliveryOrderFee deliveryOrderFee);
 }
