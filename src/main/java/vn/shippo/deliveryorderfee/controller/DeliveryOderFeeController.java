@@ -1,6 +1,9 @@
 package vn.shippo.deliveryorderfee.controller;
 
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +22,12 @@ public class DeliveryOderFeeController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<DeliveryOrderFee> listAll(){
-        return deliveryOrderFeeService.findAll();
+    public ResponseEntity<List<DeliveryOrderFee>> listAll(){
+
+        List<DeliveryOrderFee> deliveryOrderFees = deliveryOrderFeeService.findAll();
+        if(deliveryOrderFees.isEmpty()){
+            return new ResponseEntity<List<DeliveryOrderFee>>( HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<DeliveryOrderFee>>(deliveryOrderFees, HttpStatus.OK);
     }
 }
