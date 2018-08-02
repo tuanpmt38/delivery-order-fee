@@ -1,4 +1,4 @@
-package vn.shippo.deliveryorderfee.model;
+package deliveryorderfees.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

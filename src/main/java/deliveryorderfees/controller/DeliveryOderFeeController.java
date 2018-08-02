@@ -1,23 +1,26 @@
-package vn.shippo.deliveryorderfee.controller;
+package deliveryorderfees.controller;
 
 
+import deliveryorderfees.model.DeliveryOrderFee;
+import deliveryorderfees.service.DeliveryOrderFeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
-import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
-import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/deliveryOrderFee")
+@RequestMapping("/delivery/orderfee")
 public class DeliveryOderFeeController {
+
+    private static final Logger logger = LogManager.getLogger(DeliveryOrderFee.class);
+
 
     private DeliveryOrderFeeService deliveryOrderFeeService;
     public DeliveryOderFeeController(DeliveryOrderFeeService deliveryOrderFeeService){
@@ -38,7 +41,7 @@ public class DeliveryOderFeeController {
     public ResponseEntity<Void> createCustomer(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
         deliveryOrderFeeService.save(deliveryOrderFee);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/deliveryOrderFee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/deliveryorderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
@@ -60,6 +63,7 @@ public class DeliveryOderFeeController {
             DeliveryOrderFee deliveryOrderFees = deliveryOrderFee.get();
         }
         return deliveryOrderFee;
+
     }
 
 
