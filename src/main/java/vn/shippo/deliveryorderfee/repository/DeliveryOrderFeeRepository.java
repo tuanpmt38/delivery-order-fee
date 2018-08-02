@@ -1,6 +1,9 @@
 package vn.shippo.deliveryorderfee.repository;
 
 
-public interface DeliveryOrderFeeRepository {
+import org.springframework.data.repository.PagingAndSortingRepository;
+import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
+
+public interface DeliveryOrderFeeRepository extends PagingAndSortingRepository<DeliveryOrderFee, Integer> {
 
 }
