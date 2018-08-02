@@ -29,7 +29,8 @@ public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
     }
 
     @Override
-    public void save(DeliveryOrderFee deliveryOrderFee) {
+    public DeliveryOrderFee save(DeliveryOrderFee deliveryOrderFee) {
 
+        return deliveryOrderFee;
     }
 }

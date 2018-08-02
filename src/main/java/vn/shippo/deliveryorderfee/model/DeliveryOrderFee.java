@@ -1,6 +1,7 @@
 package vn.shippo.deliveryorderfee.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "delivery_order_fee")
@@ -17,7 +18,7 @@ public class DeliveryOrderFee {
 
     private String feeCode;
 
-    private String unitPrice;
+    private Float unitPrice;
 
     private Float quantity;
 
@@ -37,7 +38,27 @@ public class DeliveryOrderFee {
 
     private Integer version;
 
+    private Timestamp updateAt;
+
+    private Timestamp lastestCalAt;
+
     public DeliveryOrderFee(){}
+
+    public Timestamp getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Timestamp updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public Timestamp getLastestCalAt() {
+        return lastestCalAt;
+    }
+
+    public void setLastestCalAt(Timestamp lastestCalAt) {
+        this.lastestCalAt = lastestCalAt;
+    }
 
     public Integer getId() {
         return id;
@@ -79,11 +100,11 @@ public class DeliveryOrderFee {
         this.feeCode = feeCode;
     }
 
-    public String getUnitPrice() {
+    public Float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(String unitPrice) {
+    public void setUnitPrice(Float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
