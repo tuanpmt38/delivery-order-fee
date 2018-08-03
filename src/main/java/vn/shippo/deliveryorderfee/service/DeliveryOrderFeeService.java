@@ -11,7 +11,9 @@ public interface DeliveryOrderFeeService {
 
     Optional<DeliveryOrderFee> findById(Integer id);
 
-    DeliveryOrderFee save(DeliveryOrderFee deliveryOrderFee);
+    void save(DeliveryOrderFee deliveryOrderFee);
+
+    void delete (Integer id);
 
     DeliveryOrderFee findByName(String name);
 

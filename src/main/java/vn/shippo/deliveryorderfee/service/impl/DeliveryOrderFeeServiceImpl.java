@@ -29,9 +29,14 @@ public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
     }
 
     @Override
-    public DeliveryOrderFee save(DeliveryOrderFee deliveryOrderFee) {
+    public void save(DeliveryOrderFee deliveryOrderFee) {
 
-        return deliveryOrderFee;
+         deliveryOrderFeeRepository.save(deliveryOrderFee);
+    }
+
+    @Override
+    public void delete(Integer id) {
+         deliveryOrderFeeRepository.deleteById(id);
     }
 
     @Override
@@ -43,4 +48,6 @@ public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
     public boolean isDeliveryOrderExist(DeliveryOrderFee deliveryOrderFee) {
         return findByName(deliveryOrderFee.getFeeName())!=null;
     }
+
+
 }

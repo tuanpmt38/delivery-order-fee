@@ -29,6 +29,7 @@ public class TransectionHistoriesController {
 
     @RequestMapping(value = "/histories", method = RequestMethod.GET)
     public ResponseEntity<List<TransectionHistories>> listAll(){
+
         List<TransectionHistories> transectionHistories = transectionHistoriesService.findAll();
         if(transectionHistories.isEmpty()){
             return new ResponseEntity<List<TransectionHistories>>( HttpStatus.NO_CONTENT);
