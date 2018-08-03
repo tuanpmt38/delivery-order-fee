@@ -21,4 +21,5 @@ public class TransectionHistoriesServiceImpl implements TransectionHistoriesServ
     public List<TransectionHistories> findAll() {
         return (List<TransectionHistories>) transectionHistoriesRepository.findAll();
     }
+
 }

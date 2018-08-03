@@ -1,11 +1,12 @@
 package vn.shippo.deliveryorderfee.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "delivery_order_fee")
-public class DeliveryOrderFee {
+public class DeliveryOrderFee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

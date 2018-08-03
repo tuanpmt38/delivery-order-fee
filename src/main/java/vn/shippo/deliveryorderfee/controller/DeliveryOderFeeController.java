@@ -1,7 +1,9 @@
 package vn.shippo.deliveryorderfee.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
+import vn.shippo.deliveryorderfee.repository.DeliveryOrderFeeRepository;
 import vn.shippo.deliveryorderfee.service.DeliveryOrderFeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,12 +14,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/delivery")
 public class DeliveryOderFeeController {
+
+    @Autowired
+    private DeliveryOrderFeeRepository deliveryOrderFeeRepository;
 
     private static final Logger logger = LogManager.getLogger(DeliveryOrderFee.class);
 
@@ -38,15 +44,11 @@ public class DeliveryOderFeeController {
     }
 
     @RequestMapping(value = "/orderfee/create", method = RequestMethod.POST)
-    public ResponseEntity<Void> createDeliveryOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating DeliveryOrderFee " + deliveryOrderFee.getFeeName());
-        deliveryOrderFeeService.save(deliveryOrderFee);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/delivery/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    public DeliveryOrderFee createDeliveryOrderFee (@Valid @RequestBody DeliveryOrderFee deliveryOrderFee){
+        return deliveryOrderFeeRepository.save(deliveryOrderFee);
     }
 
-//    @RequestMapping(value = "/delivery/orderfee/create", method = RequestMethod.POST)
+//    @RequestMapping(value = "/orderfee/create", method = RequestMethod.POST)
 //    public ResponseEntity<?> createDeliveryOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder){
 //        logger.info("Creating DeliveryOrderFee : {}", deliveryOrderFee);
 //        HttpHeaders headers = new HttpHeaders();
@@ -57,7 +59,7 @@ public class DeliveryOderFeeController {
 //        }
 //
 //        deliveryOrderFeeService.save(deliveryOrderFee);
-//        headers.setLocation(ucBuilder.path("/delivery/orderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
+//        headers.setLocation(ucBuilder.path("/api/delivery/orderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
 //        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
 //    }
 
