@@ -13,4 +13,7 @@ public interface DeliveryOrderFeeService {
 
     DeliveryOrderFee save(DeliveryOrderFee deliveryOrderFee);
 
+    DeliveryOrderFee findByName(String name);
+
+    boolean isDeliveryOrderExist(DeliveryOrderFee deliveryOrderFee);
 }

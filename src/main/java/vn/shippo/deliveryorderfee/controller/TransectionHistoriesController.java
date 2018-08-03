@@ -12,7 +12,7 @@ import vn.shippo.deliveryorderfee.service.TransectionHistoriesService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/transection/histories")
+@RequestMapping("/api")
 public class TransectionHistoriesController {
 
     private TransectionHistoriesService transectionHistoriesService;
@@ -22,7 +22,7 @@ public class TransectionHistoriesController {
         this.transectionHistoriesService = transectionHistoriesService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/transection/histories", method = RequestMethod.GET)
     public ResponseEntity<List<TransectionHistories>> listAll(){
         List<TransectionHistories> transectionHistories = transectionHistoriesService.findAll();
         if(transectionHistories.isEmpty()){

@@ -33,4 +33,14 @@ public class DeliveryOrderFeeServiceImpl implements DeliveryOrderFeeService {
 
         return deliveryOrderFee;
     }
+
+    @Override
+    public DeliveryOrderFee findByName(String name) {
+        return deliveryOrderFeeRepository.findByFeeName(name);
+    }
+
+    @Override
+    public boolean isDeliveryOrderExist(DeliveryOrderFee deliveryOrderFee) {
+        return findByName(deliveryOrderFee.getFeeName())!=null;
+    }
 }

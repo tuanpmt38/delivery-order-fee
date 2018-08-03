@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DeliveryOrderFeeRepository extends PagingAndSortingRepository<DeliveryOrderFee, Integer> {
 
+    DeliveryOrderFee findByFeeName(String name);
 }
