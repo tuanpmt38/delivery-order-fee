@@ -15,7 +15,7 @@ import vn.shippo.deliveryorderfee.service.TransectionHistoriesService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/transection/")
+@RequestMapping("/transection")
 public class TransectionHistoriesController {
 
     private TransectionHistoriesService transectionHistoriesService;
@@ -28,7 +28,7 @@ public class TransectionHistoriesController {
     }
 
     @RequestMapping(value = "/histories", method = RequestMethod.GET)
-    public ResponseEntity<List<TransectionHistories>> listAll(){
+    public ResponseEntity<List<TransectionHistories>> getHistories(){
 
         List<TransectionHistories> transectionHistories = transectionHistoriesService.findAll();
         if(transectionHistories.isEmpty()){

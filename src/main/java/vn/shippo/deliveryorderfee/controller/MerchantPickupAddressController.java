@@ -24,7 +24,7 @@ public class MerchantPickupAddressController {
     }
 
     @RequestMapping(value = "/merchantpickupaddress", method = RequestMethod.GET)
-    public ResponseEntity<List<MerchantPickupAddress>> listAll(){
+    public ResponseEntity<List<MerchantPickupAddress>> getMerchantPickupAddress(){
 
         List<MerchantPickupAddress> merchantPickupAddresses = merchantPickupAddressService.findAll();
         if(merchantPickupAddresses.isEmpty()){
