@@ -33,8 +33,8 @@ public class DeliveryOderFeeController {
         this.deliveryOrderFeeService = deliveryOrderFeeService;
     }
 
-    @RequestMapping(value = "/orderfee", method = RequestMethod.GET)
-    public ResponseEntity<List<DeliveryOrderFee>> listAll() {
+    @RequestMapping(value = "/orderfees", method = RequestMethod.GET)
+    public ResponseEntity<List<DeliveryOrderFee>> getOrderFees() {
 
         List<DeliveryOrderFee> deliveryOrderFees = deliveryOrderFeeService.findAll();
         if (deliveryOrderFees.isEmpty()) {
@@ -43,30 +43,39 @@ public class DeliveryOderFeeController {
         return new ResponseEntity<List<DeliveryOrderFee>>(deliveryOrderFees, HttpStatus.OK);
     }
 
+//    @RequestMapping(value = "/orderfee/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Optional<DeliveryOrderFee> getOrderFeeById(@PathVariable("id") Integer id) {
+//
+//        logger.info("Fetching DeliveryOrderFee with id {}", id);
+//        Optional<DeliveryOrderFee> deliveryOrderFee = deliveryOrderFeeService.findById(id);
+//        if (deliveryOrderFee.isPresent()) {
+//            DeliveryOrderFee deliveryOrderFees = deliveryOrderFee.get();
+//        }
+//
+//        return deliveryOrderFee;
+//    }
     @RequestMapping(value = "/orderfee/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Optional<DeliveryOrderFee> getDeliveryOrderFeeById(@PathVariable("id") Integer id) {
-
-        logger.info("Fetching DeliveryOrderFee with id {}", id);
+    public ResponseEntity<DeliveryOrderFee> getOrderFeeById(@PathVariable("id") Integer id){
         Optional<DeliveryOrderFee> deliveryOrderFee = deliveryOrderFeeService.findById(id);
-        if (deliveryOrderFee.isPresent()) {
-            DeliveryOrderFee deliveryOrderFees = deliveryOrderFee.get();
+        if(deliveryOrderFee.isPresent()){
+            return new ResponseEntity<>(deliveryOrderFee.get(), HttpStatus.OK);
         }
-        return deliveryOrderFee;
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/orderfee/create", method = RequestMethod.POST)
-    public ResponseEntity<Void> createDeliveryOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = "/orderfees", method = RequestMethod.POST)
+    public ResponseEntity<Void> createOrderFee(@RequestBody DeliveryOrderFee deliveryOrderFee, UriComponentsBuilder ucBuilder) {
 
         logger.info("Creating DeliveryOrderFee : {}", deliveryOrderFee);
         deliveryOrderFeeService.save(deliveryOrderFee);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/delivery/orderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/orderfee/{id}").buildAndExpand(deliveryOrderFee.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 
     }
 
-    @RequestMapping(value = "/delete/orderfee/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<DeliveryOrderFee> deleteDelivery (@PathVariable ("id") Integer id){
+    @RequestMapping(value = "/orderfee/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<DeliveryOrderFee> deleteOrderFeeId (@PathVariable ("id") Integer id){
 
         logger.info("Fetching & Deleting Delivery with id {}", id);
         Optional<DeliveryOrderFee> deliveryOrderFee = deliveryOrderFeeService.findById(id);
