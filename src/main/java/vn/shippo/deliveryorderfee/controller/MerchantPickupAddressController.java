@@ -13,7 +13,7 @@ import vn.shippo.deliveryorderfee.service.MerchantPickupAddressService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/merchantpickupaddress")
 public class MerchantPickupAddressController {
 
     private MerchantPickupAddressService merchantPickupAddressService;
@@ -23,7 +23,7 @@ public class MerchantPickupAddressController {
         this.merchantPickupAddressService = merchantPickupAddressService;
     }
 
-    @RequestMapping(value = "/merchantpickupaddress", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ResponseEntity<List<MerchantPickupAddress>> getMerchantPickupAddress(){
 
         List<MerchantPickupAddress> merchantPickupAddresses = merchantPickupAddressService.findAll();

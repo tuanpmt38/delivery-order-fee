@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "transection_histories")
-public class TransectionHistories {
+@Table(name = "transaction_histories")
+public class TransactionHistories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,9 +15,9 @@ public class TransectionHistories {
 
     private Integer merchantId;
 
-    private String finalMechantBalant;
+    private Float finalMechantBalance;
 
-    private String transAmount;
+    private Float transAmount;
 
     private String transType;
 
@@ -29,9 +29,11 @@ public class TransectionHistories {
 
     private Integer objectId;
 
-    private String createdBy;
+    private Integer createdBy;
 
-    private String complateBy;
+    private Integer complateBy;
+
+    private String recodeId;
 
     private Integer version;
 
@@ -39,7 +41,7 @@ public class TransectionHistories {
 
     private Timestamp updateAt;
 
-    public TransectionHistories(){}
+    public TransactionHistories(){}
 
     public Integer getId() {
         return id;
@@ -65,20 +67,32 @@ public class TransectionHistories {
         this.merchantId = merchantId;
     }
 
-    public String getFinalMechantBalant() {
-        return finalMechantBalant;
+    public Float getFinalMechantBalance() {
+        return finalMechantBalance;
     }
 
-    public void setFinalMechantBalant(String finalMechantBalant) {
-        this.finalMechantBalant = finalMechantBalant;
+    public void setFinalMechantBalance(Float finalMechantBalance) {
+        this.finalMechantBalance = finalMechantBalance;
     }
 
-    public String getTransAmount() {
-        return transAmount;
-    }
-
-    public void setTransAmount(String transAmount) {
+    public void setTransAmount(Float transAmount) {
         this.transAmount = transAmount;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setComplateBy(Integer complateBy) {
+        this.complateBy = complateBy;
+    }
+
+    public String getRecodeId() {
+        return recodeId;
+    }
+
+    public void setRecodeId(String recodeId) {
+        this.recodeId = recodeId;
     }
 
     public String getTransType() {
@@ -121,22 +135,6 @@ public class TransectionHistories {
         this.objectId = objectId;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getComplateBy() {
-        return complateBy;
-    }
-
-    public void setComplateBy(String complateBy) {
-        this.complateBy = complateBy;
-    }
-
     public Integer getVersion() {
         return version;
     }
@@ -163,19 +161,20 @@ public class TransectionHistories {
 
     @Override
     public String toString() {
-        return "TransectionHistories{" +
+        return "TransactionHistories{" +
                 "id=" + id +
                 ", barCode='" + barCode + '\'' +
                 ", merchantId=" + merchantId +
-                ", finalMechantBalant='" + finalMechantBalant + '\'' +
-                ", transAmount='" + transAmount + '\'' +
+                ", finalMechantBalance=" + finalMechantBalance +
+                ", transAmount=" + transAmount +
                 ", transType='" + transType + '\'' +
                 ", privateNote='" + privateNote + '\'' +
                 ", transDetail='" + transDetail + '\'' +
                 ", objectType='" + objectType + '\'' +
                 ", objectId=" + objectId +
-                ", createdBy='" + createdBy + '\'' +
-                ", complateBy='" + complateBy + '\'' +
+                ", createdBy=" + createdBy +
+                ", complateBy=" + complateBy +
+                ", recodeId='" + recodeId + '\'' +
                 ", version=" + version +
                 ", createAt=" + createAt +
                 ", updateAt=" + updateAt +

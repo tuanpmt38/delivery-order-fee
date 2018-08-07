@@ -2,7 +2,7 @@ package vn.shippo.deliveryorderfee.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vn.shippo.deliveryorderfee.model.TransectionHistories;
+import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import vn.shippo.deliveryorderfee.repository.TransectionHistoriesRepository;
 import vn.shippo.deliveryorderfee.service.TransectionHistoriesService;
 
@@ -18,8 +18,8 @@ public class TransectionHistoriesServiceImpl implements TransectionHistoriesServ
         this.transectionHistoriesRepository = transectionHistoriesRepository;
     }
     @Override
-    public List<TransectionHistories> findAll() {
-        return (List<TransectionHistories>) transectionHistoriesRepository.findAll();
+    public List<TransactionHistories> findAll() {
+        return (List<TransactionHistories>) transectionHistoriesRepository.findAll();
     }
 
 }
