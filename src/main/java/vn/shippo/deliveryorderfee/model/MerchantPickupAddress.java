@@ -22,7 +22,7 @@ public class MerchantPickupAddress {
 
     private String pickupDetailAddress;
 
-    private String pickupLocaltionIdsParth;
+    private Integer pickupLocationIdsPath;
 
     private String pickupContactName;
 
@@ -80,12 +80,12 @@ public class MerchantPickupAddress {
         this.pickupDetailAddress = pickupDetailAddress;
     }
 
-    public String getPickupLocaltionIdsParth() {
-        return pickupLocaltionIdsParth;
+    public Integer getPickupLocationIdsPath() {
+        return pickupLocationIdsPath;
     }
 
-    public void setPickupLocaltionIdsParth(String pickupLocaltionIdsParth) {
-        this.pickupLocaltionIdsParth = pickupLocaltionIdsParth;
+    public void setPickupLocationIdsPath(Integer pickupLocationIdsPath) {
+        this.pickupLocationIdsPath = pickupLocationIdsPath;
     }
 
     public String getPickupContactName() {
@@ -152,7 +152,7 @@ public class MerchantPickupAddress {
                 ", createdBy='" + createdBy + '\'' +
                 ", merchantId=" + merchantId +
                 ", pickupDetailAddress='" + pickupDetailAddress + '\'' +
-                ", pickupLocaltionIdsParth='" + pickupLocaltionIdsParth + '\'' +
+                ", pickupLocationIdsPath='" + pickupLocationIdsPath + '\'' +
                 ", pickupContactName='" + pickupContactName + '\'' +
                 ", pickupContactPhone='" + pickupContactPhone + '\'' +
                 ", pickupFullAddress='" + pickupFullAddress + '\'' +

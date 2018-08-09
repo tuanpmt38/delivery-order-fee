@@ -1,6 +1,8 @@
 package vn.shippo.deliveryorderfee.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import vn.shippo.deliveryorderfee.repository.TransectionHistoriesRepository;
@@ -22,4 +24,8 @@ public class TransectionHistoriesServiceImpl implements TransectionHistoriesServ
         return (List<TransactionHistories>) transectionHistoriesRepository.findAll();
     }
 
+    @Override
+    public Page<TransactionHistories> findAll(Pageable pageable) {
+        return transectionHistoriesRepository.findAll(pageable);
+    }
 }

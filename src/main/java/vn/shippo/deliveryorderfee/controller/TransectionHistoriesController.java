@@ -1,6 +1,8 @@
 package vn.shippo.deliveryorderfee.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,14 +27,23 @@ public class TransectionHistoriesController {
         this.transectionHistoriesService = transectionHistoriesService;
     }
 
-    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
-    public ResponseEntity<List<TransactionHistories>> getCustomerTransactions(){
+//    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
+//    public ResponseEntity<List<TransactionHistories>> getCustomerTransactions(){
+//
+//        List<TransactionHistories> transectionHistories = transectionHistoriesService.findAll();
+//        if(transectionHistories.isEmpty()){
+//            return new ResponseEntity<List<TransactionHistories>>( HttpStatus.NO_CONTENT);
+//        }
+//        return new ResponseEntity<List<TransactionHistories>>(transectionHistories, HttpStatus.OK);
+//    }
 
-        List<TransactionHistories> transectionHistories = transectionHistoriesService.findAll();
-        if(transectionHistories.isEmpty()){
-            return new ResponseEntity<List<TransactionHistories>>( HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<List<TransactionHistories>>(transectionHistories, HttpStatus.OK);
+    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
+    public ResponseEntity<Page<TransactionHistories>> getCustomerTransactions(Pageable pageable){
+
+        Page<TransactionHistories> transactionHistories = transectionHistoriesService.findAll(pageable);
+        System.out.printf("list transaction:"+ transactionHistories);
+
+        return new ResponseEntity<Page<TransactionHistories>>(transactionHistories, HttpStatus.OK);
     }
 
 }
