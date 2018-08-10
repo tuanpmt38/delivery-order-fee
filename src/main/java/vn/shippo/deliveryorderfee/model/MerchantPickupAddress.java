@@ -1,14 +1,12 @@
 package vn.shippo.deliveryorderfee.model;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
-public class MerchantPickupAddress {
+@Table(name = "merchant_pickup_address")
+public class MerchantPickupAddress implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

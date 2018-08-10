@@ -40,7 +40,7 @@ public class MerchantPickupAddressController {
     public ResponseEntity<Page<MerchantPickupAddress>> getMerchantPickupAddress(Pageable pageable) {
 
         Page<MerchantPickupAddress> merchantPickupAddressPage = merchantPickupAddressService.findAll(pageable);
-        logger.info("Page merchant pickup address: " + merchantPickupAddressPage);
+        logger.info("Page Merchant pickup address: " + merchantPickupAddressPage);
         return new ResponseEntity<Page<MerchantPickupAddress>>(merchantPickupAddressPage, HttpStatus.OK);
     }
 
@@ -86,7 +86,7 @@ public class MerchantPickupAddressController {
 
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<MerchantPickupAddress> deleteMerchantPickupAddress(@PathVariable ("id") Integer id){
-        logger.info("Fetching and deleting pickupaddress with id ="+id);
+        logger.info("Fetching and deleting pickup address with id ="+id);
         Optional<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findById(id);
         merchantPickupAddressService.delete(merchantPickupAddress.get().getId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
