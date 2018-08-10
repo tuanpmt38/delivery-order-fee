@@ -12,5 +12,31 @@ public class DeliveryOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String barCode;
+
+    private Integer merchantId;
+
+    private Integer pickupLocationIdsPath;
+
+    private String pickupLocationNamesPath;
+
+    private Integer deliverLocationIdsPath;
+
+    private String deliveLocationNamesPath;
+
+    private String pickupPhone;
+
+    private String contact;
+
+    private String pickupDetailAddress;
+
+    private String pickupFullAddress;
+
+    private Integer state;
+
+    private String merchantPrivateNote;
+
+
+
 
 }

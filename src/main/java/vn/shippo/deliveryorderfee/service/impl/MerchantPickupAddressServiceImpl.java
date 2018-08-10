@@ -8,6 +8,7 @@ import vn.shippo.deliveryorderfee.model.MerchantPickupAddress;
 import vn.shippo.deliveryorderfee.repository.MerchantPickupAddressRepository;
 import vn.shippo.deliveryorderfee.service.MerchantPickupAddressService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,7 @@ public class MerchantPickupAddressServiceImpl implements MerchantPickupAddressSe
     }
 
     @Override
-    public Optional<MerchantPickupAddress> findById(Integer id) {
+    public Optional<MerchantPickupAddress> findById(Integer id) throws EntityNotFoundException {
         return merchantPickupAddressRepository.findById(id);
     }
 
@@ -39,4 +40,10 @@ public class MerchantPickupAddressServiceImpl implements MerchantPickupAddressSe
     public void save(MerchantPickupAddress merchantPickupAddress) {
         merchantPickupAddressRepository.save(merchantPickupAddress);
     }
+
+    @Override
+    public void delete(Integer id) {
+        merchantPickupAddressRepository.deleteById(id);
+    }
+
 }

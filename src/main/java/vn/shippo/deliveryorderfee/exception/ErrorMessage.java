@@ -2,7 +2,7 @@ package vn.shippo.deliveryorderfee.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class ApiError {
+public class ErrorMessage {
 
     private HttpStatus status;
 
@@ -34,17 +34,17 @@ public class ApiError {
         this.name = name;
     }
 
-    public ApiError(HttpStatus httpStatus, String message, String name) {
-        this.status = httpStatus;
+    public ErrorMessage(HttpStatus status, String message, String name) {
+        this.status = status;
         this.message = message;
         this.name = name;
     }
 
-    public ApiError(HttpStatus status) {
+    public ErrorMessage(HttpStatus status) {
         this.status = status;
     }
 
-    public ApiError(String message){
+    public ErrorMessage(String message){
         this.message = message;
     }
 
