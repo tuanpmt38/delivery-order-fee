@@ -20,7 +20,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String name = "name error";
         String message = "content error";
-        return buildResponseEntity(new ErrorMessage(HttpStatus.NOT_FOUND, name, message));
+        return buildResponseEntity(new ErrorMessage(HttpStatus.NOT_FOUND, name, message, ex));
     }
 
     private ResponseEntity<Object> buildResponseEntity(ErrorMessage errorMessage) {

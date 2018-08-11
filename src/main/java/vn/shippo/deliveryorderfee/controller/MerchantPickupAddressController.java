@@ -51,11 +51,10 @@ public class MerchantPickupAddressController {
         logger.info("Merchant pickup address by id: "+ id);
         Optional<MerchantPickupAddress> pickupAddress = merchantPickupAddressService.findById(id);
         logger.info("Result pickup address: " + pickupAddress);
-        if(pickupAddress.isPresent()){
-            return new ResponseEntity<>(pickupAddress.get(), HttpStatus.OK);
+        if(!pickupAddress.isPresent()){
+            throw new EntityNotFoundException();
         }
-        return new ResponseEntity(new ErrorMessage(HttpStatus.NOT_FOUND, "name", "error name"),HttpStatus.NOT_FOUND);
-    }
+        return new ResponseEntity<>(pickupAddress.get(), HttpStatus.OK);    }
 
     @RequestMapping(value = "/pickup_address", method = RequestMethod.POST)
     public ResponseEntity<Void> createMerchantPickupAddress(@RequestBody MerchantPickupAddress merchantPickupAddress, UriComponentsBuilder builder){
@@ -70,17 +69,17 @@ public class MerchantPickupAddressController {
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.PUT)
     public ResponseEntity<MerchantPickupAddress> updateMerchantPickupAddress(@PathVariable("id") Integer id, @RequestBody MerchantPickupAddress pickupAddress){
         logger.info("Fetching and update pickup address with id = "+id);
-        Optional<MerchantPickupAddress> currentmerchantPickupAddress = merchantPickupAddressService.findById(id);
-        if(!currentmerchantPickupAddress.isPresent()){
+        Optional<MerchantPickupAddress> currentMerchantPickupAddress = merchantPickupAddressService.findById(id);
+        if(!currentMerchantPickupAddress.isPresent()){
             logger.info("pickup address with "+ id +"not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        currentmerchantPickupAddress.get().setPickupContactName(pickupAddress.getPickupContactName());
-        currentmerchantPickupAddress.get().setPickupContactPhone(pickupAddress.getPickupContactPhone());
-        currentmerchantPickupAddress.get().setPickupFullAddress(pickupAddress.getPickupFullAddress());
-        merchantPickupAddressService.save(currentmerchantPickupAddress.get());
-        logger.info("Result current merchant pickup address:" + currentmerchantPickupAddress);
-        return new ResponseEntity<MerchantPickupAddress>(currentmerchantPickupAddress.get(),HttpStatus.OK);
+        currentMerchantPickupAddress.get().setPickupContactName(pickupAddress.getPickupContactName());
+        currentMerchantPickupAddress.get().setPickupContactPhone(pickupAddress.getPickupContactPhone());
+        currentMerchantPickupAddress.get().setPickupFullAddress(pickupAddress.getPickupFullAddress());
+        merchantPickupAddressService.save(currentMerchantPickupAddress.get());
+        logger.info("Result current merchant pickup address:" + currentMerchantPickupAddress);
+        return new ResponseEntity<MerchantPickupAddress>(currentMerchantPickupAddress.get(),HttpStatus.OK);
 
     }
 
@@ -88,7 +87,8 @@ public class MerchantPickupAddressController {
     public ResponseEntity<MerchantPickupAddress> deleteMerchantPickupAddress(@PathVariable ("id") Integer id){
         logger.info("Fetching and deleting pickup address with id ="+id);
         Optional<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findById(id);
-        merchantPickupAddressService.delete(merchantPickupAddress.get().getId());
+        merchantPickupAddress.get().setIsDeleted(1);
+        merchantPickupAddressService.save(merchantPickupAddress.get());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

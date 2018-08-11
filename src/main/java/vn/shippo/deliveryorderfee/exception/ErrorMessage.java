@@ -10,6 +10,9 @@ public class ErrorMessage {
 
     private String name;
 
+    private String debugMessage;
+
+
     public HttpStatus getStatus() {
         return status;
     }
@@ -34,10 +37,20 @@ public class ErrorMessage {
         this.name = name;
     }
 
-    public ErrorMessage(HttpStatus status, String message, String name) {
+    public String getDebugMessage() {
+        return debugMessage;
+    }
+
+    public void setDebugMessage(String debugMessage) {
+        this.debugMessage = debugMessage;
+    }
+
+    public ErrorMessage(HttpStatus status, String message, String name, Throwable ex) {
         this.status = status;
         this.message = message;
         this.name = name;
+        this.debugMessage = ex.getLocalizedMessage();
+
     }
 
     public ErrorMessage(HttpStatus status) {

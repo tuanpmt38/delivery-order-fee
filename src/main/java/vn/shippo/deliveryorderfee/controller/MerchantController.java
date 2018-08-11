@@ -26,6 +26,7 @@ public class MerchantController {
 
     @RequestMapping(value = "/merchant/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Merchant> updateMerchant(@PathVariable("id") Integer id, @RequestBody Merchant merchant){
+
         logger.info("Fetching and update merchant with id "+ id);
         Optional<Merchant> currentMerchant = merchantService.findById(id);
         if(!currentMerchant.isPresent()){
