@@ -14,7 +14,7 @@ public interface MerchantPickupAddressService {
 
     List<MerchantPickupAddress> findAll();
 
-    Optional<MerchantPickupAddress> findById(Integer id) throws EntityNotFoundException;
+    Optional<MerchantPickupAddress> findById(Integer id);
 
     void save(MerchantPickupAddress merchantPickupAddress);
 

@@ -5,29 +5,8 @@ import org.springframework.http.HttpStatus;
 public class ErrorMessage {
 
     private HttpStatus status;
-
-    private String message;
-
     private String name;
-
-    private String debugMessage;
-
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    private String message;
 
     public String getName() {
         return name;
@@ -36,30 +15,38 @@ public class ErrorMessage {
     public void setName(String name) {
         this.name = name;
     }
+//
 
-    public String getDebugMessage() {
-        return debugMessage;
+    public ErrorMessage() {
+        super();
     }
 
-    public void setDebugMessage(String debugMessage) {
-        this.debugMessage = debugMessage;
-    }
-
-    public ErrorMessage(HttpStatus status, String message, String name, Throwable ex) {
+    public ErrorMessage(final HttpStatus status, final String name, final String message) {
+        super();
         this.status = status;
-        this.message = message;
         this.name = name;
-        this.debugMessage = ex.getLocalizedMessage();
 
+        this.message = message;
     }
 
-    public ErrorMessage(HttpStatus status) {
+    //
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(final HttpStatus status) {
         this.status = status;
     }
 
-    public ErrorMessage(String message){
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(final String message) {
         this.message = message;
     }
 
 }
+
 

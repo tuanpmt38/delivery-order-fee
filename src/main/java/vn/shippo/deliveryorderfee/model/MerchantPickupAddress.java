@@ -1,8 +1,15 @@
 package vn.shippo.deliveryorderfee.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+@Builder
+@AllArgsConstructor
 
 @Entity
 @Table(name = "merchant_pickup_address")

@@ -32,7 +32,7 @@ public class MerchantPickupAddressServiceImpl implements MerchantPickupAddressSe
     }
 
     @Override
-    public Optional<MerchantPickupAddress> findById(Integer id) throws EntityNotFoundException {
+    public Optional<MerchantPickupAddress> findById(Integer id) {
         return merchantPickupAddressRepository.findById(id);
     }
 
