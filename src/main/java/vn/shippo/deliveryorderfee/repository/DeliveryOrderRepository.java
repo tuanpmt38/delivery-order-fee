@@ -8,6 +8,6 @@ import vn.shippo.deliveryorderfee.model.DeliveryOrder;
 @Repository
 public interface DeliveryOrderRepository extends PagingAndSortingRepository<DeliveryOrder, Integer> {
 
-    @Query(value = "select * from delivery_order d where d.bar_code = ?1", nativeQuery = true)
-    DeliveryOrder findByBarCode(String barCode);
+    @Query(value = "select * from delivery_order d where d.barcode = ?1", nativeQuery = true)
+    DeliveryOrder findByBarcode(String barcode);
 }

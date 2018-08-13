@@ -4,6 +4,6 @@ import vn.shippo.deliveryorderfee.model.DeliveryOrder;
 
 public interface DeliveryOrderService {
 
-    DeliveryOrder findByBarCode(String barCode);
+    DeliveryOrder findByBarcode(String barcode);
 
 }

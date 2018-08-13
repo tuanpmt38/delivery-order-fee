@@ -17,7 +17,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     }
 
     @Override
-    public DeliveryOrder findByBarCode(String barCode ) {
-        return deliveryOrderRepository.findByBarCode(barCode);
+    public DeliveryOrder findByBarcode(String barcode ) {
+        return deliveryOrderRepository.findByBarcode(barcode);
     }
 }

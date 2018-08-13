@@ -8,6 +8,7 @@ import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import vn.shippo.deliveryorderfee.repository.TransectionHistoriesRepository;
 import vn.shippo.deliveryorderfee.service.TransectionHistoriesService;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -27,5 +28,10 @@ public class TransectionHistoriesServiceImpl implements TransectionHistoriesServ
     @Override
     public Page<TransactionHistories> findAll(Pageable pageable) {
         return transectionHistoriesRepository.findAll(pageable);
+    }
+
+    @Override
+    public TransactionHistories findByTransTypeAndCreateAt(String transType, Timestamp createAt) {
+        return transectionHistoriesRepository.findByTransTypeAndCreateAt(transType, createAt);
     }
 }

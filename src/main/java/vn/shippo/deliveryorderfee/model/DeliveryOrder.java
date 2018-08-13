@@ -1,98 +1,143 @@
 package vn.shippo.deliveryorderfee.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+
+/**
+ * The persistent class for the delivery_order database table.
+ *
+ */
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "delivery_order")
-public class DeliveryOrder {
+@Table(name="delivery_order")
+//@NamedQuery(name="DeliveryOrder.findAll", query="SELECT d FROM DeliveryOrder d")
+public class DeliveryOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String barCode;
+    private String barcode;
 
-    private Integer merchantId;
+    private double cod;
 
-    private Integer pickupLocationIdsPath;
+    @Column(name = "create_from_order")
+    private Integer createFromOrder;
 
-    private String pickupLocationNamesPath;
+    @Column(name = "create_method")
+    private String createMethod;
 
-    private Integer deliverLocationIdsPath;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
+    @Column(name = "current_warehouse_id")
+    private Integer currentWarehouseId;
+
+    @Column(name = "current_warehouse_state")
+    private String currentWarehouseState;
+
+    @Column(name = "deliver_contact")
+    private String deliverContact;
+
+    @Column(name = "deliver_detail_address")
+    private String deliverDetailAddress;
+
+    @Column(name = "deliver_full_address")
+    private String deliverFullAddress;
+
+    @Column(name = "deliver_location_ids_path")
+    private String deliverLocationIdsPath;
+
+    @Column(name = "deliver_location_names_path")
     private String deliverLocationNamesPath;
 
-    private String pickupPhone;
+    @Column(name = "deliver_phone")
+    private String deliverPhone;
 
-    private String contact;
+    @Column(name = "deliver_times")
+    private Integer deliverTimes;
 
+    @Column(name = "deliver_warehouse_id")
+    private Integer deliverWarehouseId;
+
+    @Column(name = "delivery_note")
+    private String deliveryNote;
+
+    @Column(name = "export_warehouse_at")
+    private Timestamp exportWarehouseAt;
+
+//    private Object features;
+
+    private String goods;
+
+    @Column(name = "import_warehouse_at")
+    private Timestamp importWarehouseAt;
+
+    @Column(name = "is_return")
+    private Boolean isReturn;
+
+    @Column(name = "merchant_id")
+    private Integer merchantId;
+
+    @Column(name = "merchant_order_code")
+    private String merchantOrderCode;
+
+    @Column(name = "merchant_private_note")
+    private String merchantPrivateNote;
+
+    @Column(name = "order_state")
+    private String orderState;
+
+    @Column(name = "pickup_contact")
+    private String pickupContact;
+
+    @Column(name = "pickup_detail_address")
     private String pickupDetailAddress;
 
+    @Column(name = "pickup_full_address")
     private String pickupFullAddress;
+
+    @Column(name = "pickup_location_ids_path")
+    private String pickupLocationIdsPath;
+
+    @Column(name = "pickup_location_names_path")
+    private String pickupLocationNamesPath;
+
+    @Column(name = "pickup_note")
+    private String pickupNote;
+
+    @Column(name = "pickup_phone")
+    private String pickupPhone;
+
+    @Column(name = "pickup_times")
+    private Integer pickupTimes;
+
+    @Column(name = "pickup_warehouse_id")
+    private Integer pickupWarehouseId;
+
+    @Column(name = "real_cod")
+    private double realCod;
 
     private String state;
 
-    private String merchantPrivateNote;
+//    private Object timeline;
 
-    private String deliverNote;
+    @Column(name = "total_fee")
+    private double totalFee;
 
-    private Float weight;
+    @Column(name = "total_merchant_fee")
+    private double totalMerchantFee;
 
-    private Integer pickupWarehouseId;
-
-    private Integer deliverWarehouseId;
-
-    private Float cod;
-
-    private String orderState;
-
-    private Integer currentWarehouseId;
-
-    private String currentWarehouseState;
-
-    private boolean isReturn;
-
-    private Float realCod;
-
-    private String createFromOrder;
-
-    private Float totalFee;
-
-    private Float merchantFee;
-
-    private String createMethod;
-
-    private String pickupNote;
-
-    private String goads;
-
-    private String merchantOrderCode;
-
-    private Timestamp timeline;
-
-    private Timestamp pickupTimes;
-
-    private Timestamp deliverTimes;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
     private Integer version;
 
-    public String getDeliverLocationNamesPath() {
-        return deliverLocationNamesPath;
-    }
+    private Integer weight;
 
-    public void setDeliverLocationNamesPath(String deliverLocationNamesPath) {
-        this.deliverLocationNamesPath = deliverLocationNamesPath;
+    public DeliveryOrder() {
     }
-
-    public DeliveryOrder(){}
 
     public Integer getId() {
         return id;
@@ -102,148 +147,44 @@ public class DeliveryOrder {
         this.id = id;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getBarcode() {
+        return barcode;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
-    public Integer getMerchantId() {
-        return merchantId;
-    }
-
-    public void setMerchantId(Integer merchantId) {
-        this.merchantId = merchantId;
-    }
-
-    public Integer getPickupLocationIdsPath() {
-        return pickupLocationIdsPath;
-    }
-
-    public void setPickupLocationIdsPath(Integer pickupLocationIdsPath) {
-        this.pickupLocationIdsPath = pickupLocationIdsPath;
-    }
-
-    public String getPickupLocationNamesPath() {
-        return pickupLocationNamesPath;
-    }
-
-    public void setPickupLocationNamesPath(String pickupLocationNamesPath) {
-        this.pickupLocationNamesPath = pickupLocationNamesPath;
-    }
-
-    public Integer getDeliverLocationIdsPath() {
-        return deliverLocationIdsPath;
-    }
-
-    public void setDeliverLocationIdsPath(Integer deliverLocationIdsPath) {
-        this.deliverLocationIdsPath = deliverLocationIdsPath;
-    }
-
-    public String getDeliveLocationNamesPath() {
-        return deliverLocationNamesPath;
-    }
-
-    public void setDeliveLocationNamesPath(String deliveLocationNamesPath) {
-        this.deliverLocationNamesPath = deliveLocationNamesPath;
-    }
-
-    public String getPickupPhone() {
-        return pickupPhone;
-    }
-
-    public void setPickupPhone(String pickupPhone) {
-        this.pickupPhone = pickupPhone;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getPickupDetailAddress() {
-        return pickupDetailAddress;
-    }
-
-    public void setPickupDetailAddress(String pickupDetailAddress) {
-        this.pickupDetailAddress = pickupDetailAddress;
-    }
-
-    public String getPickupFullAddress() {
-        return pickupFullAddress;
-    }
-
-    public void setPickupFullAddress(String pickupFullAddress) {
-        this.pickupFullAddress = pickupFullAddress;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getMerchantPrivateNote() {
-        return merchantPrivateNote;
-    }
-
-    public void setMerchantPrivateNote(String merchantPrivateNote) {
-        this.merchantPrivateNote = merchantPrivateNote;
-    }
-
-    public String getDeliverNote() {
-        return deliverNote;
-    }
-
-    public void setDeliverNote(String deliverNote) {
-        this.deliverNote = deliverNote;
-    }
-
-    public Float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Float weight) {
-        this.weight = weight;
-    }
-
-    public Integer getPickupWarehouseId() {
-        return pickupWarehouseId;
-    }
-
-    public void setPickupWarehouseId(Integer pickupWarehouseId) {
-        this.pickupWarehouseId = pickupWarehouseId;
-    }
-
-    public Integer getDeliverWarehouseId() {
-        return deliverWarehouseId;
-    }
-
-    public void setDeliverWarehouseId(Integer deliverWarehouseId) {
-        this.deliverWarehouseId = deliverWarehouseId;
-    }
-
-    public Float getCod() {
+    public double getCod() {
         return cod;
     }
 
-    public void setCod(Float cod) {
+    public void setCod(double cod) {
         this.cod = cod;
     }
 
-    public String getOrderState() {
-        return orderState;
+    public Integer getCreateFromOrder() {
+        return createFromOrder;
     }
 
-    public void setOrderState(String orderState) {
-        this.orderState = orderState;
+    public void setCreateFromOrder(Integer createFromOrder) {
+        this.createFromOrder = createFromOrder;
+    }
+
+    public String getCreateMethod() {
+        return createMethod;
+    }
+
+    public void setCreateMethod(String createMethod) {
+        this.createMethod = createMethod;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Integer getCurrentWarehouseId() {
@@ -262,68 +203,124 @@ public class DeliveryOrder {
         this.currentWarehouseState = currentWarehouseState;
     }
 
-    public boolean isReturn() {
+    public String getDeliverContact() {
+        return deliverContact;
+    }
+
+    public void setDeliverContact(String deliverContact) {
+        this.deliverContact = deliverContact;
+    }
+
+    public String getDeliverDetailAddress() {
+        return deliverDetailAddress;
+    }
+
+    public void setDeliverDetailAddress(String deliverDetailAddress) {
+        this.deliverDetailAddress = deliverDetailAddress;
+    }
+
+    public String getDeliverFullAddress() {
+        return deliverFullAddress;
+    }
+
+    public void setDeliverFullAddress(String deliverFullAddress) {
+        this.deliverFullAddress = deliverFullAddress;
+    }
+
+    public String getDeliverLocationIdsPath() {
+        return deliverLocationIdsPath;
+    }
+
+    public void setDeliverLocationIdsPath(String deliverLocationIdsPath) {
+        this.deliverLocationIdsPath = deliverLocationIdsPath;
+    }
+
+    public String getDeliverLocationNamesPath() {
+        return deliverLocationNamesPath;
+    }
+
+    public void setDeliverLocationNamesPath(String deliverLocationNamesPath) {
+        this.deliverLocationNamesPath = deliverLocationNamesPath;
+    }
+
+    public String getDeliverPhone() {
+        return deliverPhone;
+    }
+
+    public void setDeliverPhone(String deliverPhone) {
+        this.deliverPhone = deliverPhone;
+    }
+
+    public Integer getDeliverTimes() {
+        return deliverTimes;
+    }
+
+    public void setDeliverTimes(Integer deliverTimes) {
+        this.deliverTimes = deliverTimes;
+    }
+
+    public Integer getDeliverWarehouseId() {
+        return deliverWarehouseId;
+    }
+
+    public void setDeliverWarehouseId(Integer deliverWarehouseId) {
+        this.deliverWarehouseId = deliverWarehouseId;
+    }
+
+    public String getDeliveryNote() {
+        return deliveryNote;
+    }
+
+    public void setDeliveryNote(String deliveryNote) {
+        this.deliveryNote = deliveryNote;
+    }
+
+    public Timestamp getExportWarehouseAt() {
+        return exportWarehouseAt;
+    }
+
+    public void setExportWarehouseAt(Timestamp exportWarehouseAt) {
+        this.exportWarehouseAt = exportWarehouseAt;
+    }
+
+//    public Object getFeatures() {
+//        return features;
+//    }
+//
+//    public void setFeatures(Object features) {
+//        this.features = features;
+//    }
+
+    public String getGoods() {
+        return goods;
+    }
+
+    public void setGoods(String goods) {
+        this.goods = goods;
+    }
+
+    public Timestamp getImportWarehouseAt() {
+        return importWarehouseAt;
+    }
+
+    public void setImportWarehouseAt(Timestamp importWarehouseAt) {
+        this.importWarehouseAt = importWarehouseAt;
+    }
+
+    public Boolean getReturn() {
         return isReturn;
     }
 
-    public void setReturn(boolean aReturn) {
+    public void setReturn(Boolean aReturn) {
         isReturn = aReturn;
     }
 
-    public Float getRealCod() {
-        return realCod;
+    public Integer getMerchantId() {
+        return merchantId;
     }
 
-    public void setRealCod(Float realCod) {
-        this.realCod = realCod;
-    }
-
-    public String getCreateFromOrder() {
-        return createFromOrder;
-    }
-
-    public void setCreateFromOrder(String createFromOrder) {
-        this.createFromOrder = createFromOrder;
-    }
-
-    public Float getTotalFee() {
-        return totalFee;
-    }
-
-    public void setTotalFee(Float totalFee) {
-        this.totalFee = totalFee;
-    }
-
-    public Float getMerchantFee() {
-        return merchantFee;
-    }
-
-    public void setMerchantFee(Float merchantFee) {
-        this.merchantFee = merchantFee;
-    }
-
-    public String getCreateMethod() {
-        return createMethod;
-    }
-
-    public void setCreateMethod(String createMethod) {
-        this.createMethod = createMethod;
-    }
-
-    public String getPickupNote() {
-        return pickupNote;
-    }
-
-    public void setPickupNote(String pickupNote) {
-        this.pickupNote = pickupNote;
-    }
-
-    public String getGoads() {
-        return goads;
-    }
-
-    public void setGoads(String goads) {
-        this.goads = goads;
+    public void setMerchantId(Integer merchantId) {
+        this.merchantId = merchantId;
     }
 
     public String getMerchantOrderCode() {
@@ -334,28 +331,140 @@ public class DeliveryOrder {
         this.merchantOrderCode = merchantOrderCode;
     }
 
-    public Timestamp getTimeline() {
-        return timeline;
+    public String getMerchantPrivateNote() {
+        return merchantPrivateNote;
     }
 
-    public void setTimeline(Timestamp timeline) {
-        this.timeline = timeline;
+    public void setMerchantPrivateNote(String merchantPrivateNote) {
+        this.merchantPrivateNote = merchantPrivateNote;
     }
 
-    public Timestamp getPickupTimes() {
+    public String getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(String orderState) {
+        this.orderState = orderState;
+    }
+
+    public String getPickupContact() {
+        return pickupContact;
+    }
+
+    public void setPickupContact(String pickupContact) {
+        this.pickupContact = pickupContact;
+    }
+
+    public String getPickupDetailAddress() {
+        return pickupDetailAddress;
+    }
+
+    public void setPickupDetailAddress(String pickupDetailAddress) {
+        this.pickupDetailAddress = pickupDetailAddress;
+    }
+
+    public String getPickupFullAddress() {
+        return pickupFullAddress;
+    }
+
+    public void setPickupFullAddress(String pickupFullAddress) {
+        this.pickupFullAddress = pickupFullAddress;
+    }
+
+    public String getPickupLocationIdsPath() {
+        return pickupLocationIdsPath;
+    }
+
+    public void setPickupLocationIdsPath(String pickupLocationIdsPath) {
+        this.pickupLocationIdsPath = pickupLocationIdsPath;
+    }
+
+    public String getPickupLocationNamesPath() {
+        return pickupLocationNamesPath;
+    }
+
+    public void setPickupLocationNamesPath(String pickupLocationNamesPath) {
+        this.pickupLocationNamesPath = pickupLocationNamesPath;
+    }
+
+    public String getPickupNote() {
+        return pickupNote;
+    }
+
+    public void setPickupNote(String pickupNote) {
+        this.pickupNote = pickupNote;
+    }
+
+    public String getPickupPhone() {
+        return pickupPhone;
+    }
+
+    public void setPickupPhone(String pickupPhone) {
+        this.pickupPhone = pickupPhone;
+    }
+
+    public Integer getPickupTimes() {
         return pickupTimes;
     }
 
-    public void setPickupTimes(Timestamp pickupTimes) {
+    public void setPickupTimes(Integer pickupTimes) {
         this.pickupTimes = pickupTimes;
     }
 
-    public Timestamp getDeliverTimes() {
-        return deliverTimes;
+    public Integer getPickupWarehouseId() {
+        return pickupWarehouseId;
     }
 
-    public void setDeliverTimes(Timestamp deliverTimes) {
-        this.deliverTimes = deliverTimes;
+    public void setPickupWarehouseId(Integer pickupWarehouseId) {
+        this.pickupWarehouseId = pickupWarehouseId;
+    }
+
+    public double getRealCod() {
+        return realCod;
+    }
+
+    public void setRealCod(double realCod) {
+        this.realCod = realCod;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+//    public Object getTimeline() {
+//        return timeline;
+//    }
+//
+//    public void setTimeline(Object timeline) {
+//        this.timeline = timeline;
+//    }
+
+    public double getTotalFee() {
+        return totalFee;
+    }
+
+    public void setTotalFee(double totalFee) {
+        this.totalFee = totalFee;
+    }
+
+    public double getTotalMerchantFee() {
+        return totalMerchantFee;
+    }
+
+    public void setTotalMerchantFee(double totalMerchantFee) {
+        this.totalMerchantFee = totalMerchantFee;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Integer getVersion() {
@@ -366,43 +475,11 @@ public class DeliveryOrder {
         this.version = version;
     }
 
-    @Override
-    public String toString() {
-        return "DeliveryOrder{" +
-                "id=" + id +
-                ", barCode='" + barCode + '\'' +
-                ", merchantId=" + merchantId +
-                ", pickupLocationIdsPath=" + pickupLocationIdsPath +
-                ", pickupLocationNamesPath='" + pickupLocationNamesPath + '\'' +
-                ", deliverLocationIdsPath=" + deliverLocationIdsPath +
-                ", deliveLocationNamesPath='" + deliverLocationNamesPath + '\'' +
-                ", pickupPhone='" + pickupPhone + '\'' +
-                ", contact='" + contact + '\'' +
-                ", pickupDetailAddress='" + pickupDetailAddress + '\'' +
-                ", pickupFullAddress='" + pickupFullAddress + '\'' +
-                ", state=" + state +
-                ", merchantPrivateNote='" + merchantPrivateNote + '\'' +
-                ", deliverNote='" + deliverNote + '\'' +
-                ", weight=" + weight +
-                ", pickupWarehouseId=" + pickupWarehouseId +
-                ", deliverWarehouseId=" + deliverWarehouseId +
-                ", cod=" + cod +
-                ", orderState='" + orderState + '\'' +
-                ", currentWarehouseId=" + currentWarehouseId +
-                ", currentWarehouseState='" + currentWarehouseState + '\'' +
-                ", isReturn=" + isReturn +
-                ", realCod=" + realCod +
-                ", createFromOrder='" + createFromOrder + '\'' +
-                ", totalFee=" + totalFee +
-                ", merchantFee=" + merchantFee +
-                ", createMethod='" + createMethod + '\'' +
-                ", pickupNote='" + pickupNote + '\'' +
-                ", goads='" + goads + '\'' +
-                ", merchantOrderCode='" + merchantOrderCode + '\'' +
-                ", timeline=" + timeline +
-                ", pickupTimes=" + pickupTimes +
-                ", deliverTimes=" + deliverTimes +
-                ", version=" + version +
-                '}';
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }

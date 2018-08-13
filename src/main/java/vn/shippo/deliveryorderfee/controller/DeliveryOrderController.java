@@ -3,15 +3,14 @@ package vn.shippo.deliveryorderfee.controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.shippo.deliveryorderfee.model.DeliveryOrder;
 import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import vn.shippo.deliveryorderfee.service.DeliveryOrderService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @RestController
@@ -27,11 +26,14 @@ public class DeliveryOrderController {
     }
 
     @RequestMapping(value = "/deliveryorder", method = RequestMethod.GET)
-    public ResponseEntity<DeliveryOrder> getAllDeliveryOrderByBarcode(@RequestParam("barCode") String barCode ){
+    public ResponseEntity<Map<String, DeliveryOrder>> getAllDeliveryOrderByBarcode(@RequestParam("barcode") String barcode){
 
-        logger.info("display barcode " + barCode);
-        DeliveryOrder deliveryOrder = deliveryOrderService.findByBarCode(barCode);
+        logger.info("display barcode " + barcode);
+        DeliveryOrder deliveryOrder = deliveryOrderService.findByBarcode(barcode);
         logger.info("delivery order " + deliveryOrder);
-        return new ResponseEntity<DeliveryOrder>(deliveryOrder, HttpStatus.OK);
+        Map<String, DeliveryOrder> map=new HashMap<>();
+        map.put("result",deliveryOrder);
+
+        return  ResponseEntity.ok(map);
     }
 }
