@@ -7,7 +7,7 @@ import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface TransectionHistoriesService {
+public interface TransactionHistoriesService {
 
     List<TransactionHistories> findAll();
 

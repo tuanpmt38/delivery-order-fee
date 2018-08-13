@@ -41,6 +41,7 @@ public class DeliveryOrderController {
 
     @RequestMapping(value = "/deliveryorder/{id}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Optional<DeliveryOrder>>> getAllDeliverOrder(@PathVariable("id") Integer id){
+
         logger.info("Fetching and result with " +id);
         Optional<DeliveryOrder> deliveryOrder = deliveryOrderService.findById(id);
         if(!deliveryOrder.isPresent()){

@@ -78,6 +78,7 @@ public class MerchantPickupAddressController {
 
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.PUT)
     public ResponseEntity<MerchantPickupAddress> updateMerchantPickupAddress(@PathVariable("id") Integer id, @RequestBody MerchantPickupAddress pickupAddress){
+
         logger.info("Fetching and update pickup address with id = "+id);
         Optional<MerchantPickupAddress> currentMerchantPickupAddress = merchantPickupAddressService.findById(id);
         if(!currentMerchantPickupAddress.isPresent()){
@@ -95,6 +96,7 @@ public class MerchantPickupAddressController {
 
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<MerchantPickupAddress> deleteMerchantPickupAddress(@PathVariable ("id") Integer id){
+
         logger.info("Fetching and deleting pickup address with id ="+id);
         Optional<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findById(id);
         merchantPickupAddress.get().setIsDeleted(1);

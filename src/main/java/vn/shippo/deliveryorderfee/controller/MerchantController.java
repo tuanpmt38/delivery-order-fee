@@ -37,7 +37,6 @@ public class MerchantController {
         currentMerchant.get().setBirthday(merchant.getBirthday());
         currentMerchant.get().setGender(merchant.getGender());
         currentMerchant.get().setMobile(merchant.getMobile());
-        currentMerchant.get().setBanks(merchant.getBanks());
         merchantService.save(currentMerchant.get());
         logger.info("Result edit current merchant " +currentMerchant);
         return new ResponseEntity<Merchant>(currentMerchant.get(), HttpStatus.OK);

@@ -10,7 +10,7 @@ import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import java.sql.Timestamp;
 
 @Repository
-public interface TransectionHistoriesRepository extends PagingAndSortingRepository<TransactionHistories, Integer> {
+public interface TransactionHistoriesRepository extends PagingAndSortingRepository<TransactionHistories, Integer> {
 
     Iterable<TransactionHistories> findByTransAmount(Integer id);
 

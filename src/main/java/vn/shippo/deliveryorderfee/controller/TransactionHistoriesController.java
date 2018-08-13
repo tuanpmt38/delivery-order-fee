@@ -9,22 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import vn.shippo.deliveryorderfee.model.TransactionHistories;
-import vn.shippo.deliveryorderfee.repository.TransectionHistoriesRepository;
-import vn.shippo.deliveryorderfee.service.TransectionHistoriesService;
-
-import java.util.List;
+import vn.shippo.deliveryorderfee.repository.TransactionHistoriesRepository;
+import vn.shippo.deliveryorderfee.service.TransactionHistoriesService;
 
 @Controller
 @RequestMapping("/api")
-public class TransectionHistoriesController {
+public class TransactionHistoriesController {
 
-    private TransectionHistoriesService transectionHistoriesService;
+    private TransactionHistoriesService transactionHistoriesService;
     @Autowired
-    private TransectionHistoriesRepository transectionHistoriesRepository;
+    private TransactionHistoriesRepository transactionHistoriesRepository;
 
     @Autowired
-    public TransectionHistoriesController(TransectionHistoriesService transectionHistoriesService){
-        this.transectionHistoriesService = transectionHistoriesService;
+    public TransactionHistoriesController(TransactionHistoriesService transactionHistoriesService){
+        this.transactionHistoriesService = transactionHistoriesService;
     }
 
 //    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
@@ -37,10 +35,10 @@ public class TransectionHistoriesController {
 //        return new ResponseEntity<List<TransactionHistories>>(transectionHistories, HttpStatus.OK);
 //    }
 
-    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
+    @RequestMapping(value = "/customertransactions", method = RequestMethod.GET)
     public ResponseEntity<Page<TransactionHistories>> getCustomerTransactions(Pageable pageable){
 
-        Page<TransactionHistories> transactionHistories = transectionHistoriesService.findAll(pageable);
+        Page<TransactionHistories> transactionHistories = transactionHistoriesService.findAll(pageable);
         System.out.printf("list transaction:"+ transactionHistories);
 
         return new ResponseEntity<Page<TransactionHistories>>(transactionHistories, HttpStatus.OK);
