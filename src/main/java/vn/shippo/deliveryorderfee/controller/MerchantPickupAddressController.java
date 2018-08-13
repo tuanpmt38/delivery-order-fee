@@ -8,23 +8,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityLinks;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import vn.shippo.deliveryorderfee.model.MerchantPickupAddress;
 import vn.shippo.deliveryorderfee.service.MerchantPickupAddressService;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -35,7 +30,7 @@ public class MerchantPickupAddressController {
 
     private static final Logger logger = LogManager.getLogger(DeliveryOrderFee.class);
 
-    @Autowired private EntityLinks links;
+//    @Autowired private EntityLinks links;
 
     private MerchantPickupAddressService merchantPickupAddressService;
 
@@ -49,7 +44,7 @@ public class MerchantPickupAddressController {
 
         Page<MerchantPickupAddress> merchantPickupAddressPage = merchantPickupAddressService.findAll(pageable);
         logger.info("Page Merchant pickup address: " + merchantPickupAddressPage);
-        PagedResources < MerchantPickupAddress > pr = assembler.toResource(merchantPickupAddressPage,
+        PagedResources < MerchantPickupAddress > pickupAddressPagedResources = assembler.toResource(merchantPickupAddressPage,
                 linkTo(MerchantPickupAddressController.class).slash("/pickup_address").withSelfRel());
 
         return new ResponseEntity < > (assembler.toResource(merchantPickupAddressPage,
@@ -105,6 +100,15 @@ public class MerchantPickupAddressController {
         merchantPickupAddress.get().setIsDeleted(1);
         merchantPickupAddressService.save(merchantPickupAddress.get());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/pickup_address/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MerchantPickupAddress> getAllMerchantPickupAddressByPickupContactNameAndPickupContactPhone(@RequestParam("pickupContactName")String pickupContactName, @RequestParam("pickupContactPhone") String pickupContactPhone) {
+
+        MerchantPickupAddress merchantPickupAddress = merchantPickupAddressService.findAllByPickupContactNameAndPickupContactPhone(pickupContactName, pickupContactPhone );
+        logger.info("Merchant pickup address: " + merchantPickupAddress);
+
+        return new ResponseEntity<>(merchantPickupAddress, HttpStatus.OK);
     }
 
 

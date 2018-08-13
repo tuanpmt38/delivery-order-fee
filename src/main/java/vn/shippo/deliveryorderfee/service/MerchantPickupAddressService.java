@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import vn.shippo.deliveryorderfee.model.MerchantPickupAddress;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,5 +18,7 @@ public interface MerchantPickupAddressService {
     void save(MerchantPickupAddress merchantPickupAddress);
 
     void delete (Integer id);
+
+    MerchantPickupAddress findAllByPickupContactNameAndPickupContactPhone (String pickupContactName, String pickupContactPhone);
 
 }

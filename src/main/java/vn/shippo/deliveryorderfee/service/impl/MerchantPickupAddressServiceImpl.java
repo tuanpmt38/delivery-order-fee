@@ -3,7 +3,9 @@ package vn.shippo.deliveryorderfee.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import vn.shippo.deliveryorderfee.model.MerchantPickupAddress;
 import vn.shippo.deliveryorderfee.repository.MerchantPickupAddressRepository;
 import vn.shippo.deliveryorderfee.service.MerchantPickupAddressService;
@@ -22,7 +24,7 @@ public class MerchantPickupAddressServiceImpl implements MerchantPickupAddressSe
         this.merchantPickupAddressRepository = merchantPickupAddressRepository;
     }
     @Override
-    public Page<MerchantPickupAddress> findAll(Pageable pageable) {
+    public Page<MerchantPickupAddress> findAll( Pageable pageable) {
         return merchantPickupAddressRepository.findAll(pageable);
     }
 
@@ -45,5 +47,11 @@ public class MerchantPickupAddressServiceImpl implements MerchantPickupAddressSe
     public void delete(Integer id) {
         merchantPickupAddressRepository.deleteById(id);
     }
+
+    @Override
+    public MerchantPickupAddress findAllByPickupContactNameAndPickupContactPhone (String pickupContactName, String pickupContactPhone){
+        return merchantPickupAddressRepository.findAllByPickupContactNameAndPickupContactPhone(pickupContactName, pickupContactPhone);
+    }
+
 
 }
