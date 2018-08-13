@@ -19,7 +19,6 @@ public class DeliveryOrderController {
 
     private static final Logger logger = LogManager.getLogger(DeliveryOrderFee.class);
 
-
     private DeliveryOrderService deliveryOrderService;
 
     @Autowired

@@ -15,7 +15,6 @@ public class ErrorMessage {
     public void setName(String name) {
         this.name = name;
     }
-//
 
     public ErrorMessage() {
         super();
@@ -28,8 +27,6 @@ public class ErrorMessage {
 
         this.message = message;
     }
-
-    //
 
     public HttpStatus getStatus() {
         return status;
