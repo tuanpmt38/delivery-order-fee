@@ -85,9 +85,9 @@ public class MerchantPickupAddressController {
             logger.info("pickup address with "+ id +"not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        currentMerchantPickupAddress.get().setPickupContactName(pickupAddress.getPickupContactName());
-        currentMerchantPickupAddress.get().setPickupContactPhone(pickupAddress.getPickupContactPhone());
-        currentMerchantPickupAddress.get().setPickupFullAddress(pickupAddress.getPickupFullAddress());
+        currentMerchantPickupAddress.get().setContactName(pickupAddress.getContactName());
+        currentMerchantPickupAddress.get().setContactPhone(pickupAddress.getContactPhone());
+        currentMerchantPickupAddress.get().setFullAddress(pickupAddress.getFullAddress());
         merchantPickupAddressService.save(currentMerchantPickupAddress.get());
         logger.info("Result current merchant pickup address:" + currentMerchantPickupAddress);
         return new ResponseEntity<MerchantPickupAddress>(currentMerchantPickupAddress.get(),HttpStatus.OK);

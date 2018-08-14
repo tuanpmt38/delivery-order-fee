@@ -27,10 +27,10 @@ public class DeliveryOrderController {
         this.deliveryOrderService = deliveryOrderService;
     }
 
-    @RequestMapping(value = "/deliveryorder", method = RequestMethod.GET)
-    public ResponseEntity<Map<String, DeliveryOrder>> getAllDeliveryOrderByBarcode(@RequestParam("barcode") String barcode){
+    @RequestMapping(value = "/deliveryorder/tl/{barcode}", method = RequestMethod.GET)
+    public ResponseEntity<Map<String, DeliveryOrder>> getDeliveryOrderByBarcode(@PathVariable("barcode") String barcode){
 
-        logger.info("display barcode " + barcode);
+        logger.info("Fetching and result with " + barcode);
         DeliveryOrder deliveryOrder = deliveryOrderService.findByBarcode(barcode);
         logger.info("delivery order " + deliveryOrder);
         Map<String, DeliveryOrder> map=new HashMap<>();
@@ -40,12 +40,12 @@ public class DeliveryOrderController {
     }
 
     @RequestMapping(value = "/deliveryorder/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Map<String, Optional<DeliveryOrder>>> getAllDeliverOrder(@PathVariable("id") Integer id){
+    public ResponseEntity<Map<String, Optional<DeliveryOrder>>> getDeliverOrderById(@PathVariable("id") Integer id){
 
         logger.info("Fetching and result with " +id);
         Optional<DeliveryOrder> deliveryOrder = deliveryOrderService.findById(id);
         if(!deliveryOrder.isPresent()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity(deliveryOrder.get(),HttpStatus.NO_CONTENT);
         }
         Map<String, Optional<DeliveryOrder>> map = new HashMap<>();
         map.put("result", deliveryOrder);

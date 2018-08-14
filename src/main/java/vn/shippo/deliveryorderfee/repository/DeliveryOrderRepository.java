@@ -10,4 +10,7 @@ public interface DeliveryOrderRepository extends PagingAndSortingRepository<Deli
 
     @Query(value = "select * from delivery_order d where d.barcode = ?1", nativeQuery = true)
     DeliveryOrder findByBarcode(String barcode);
+
+    @Query(value = "select * from delivery_order d where d.barcode = ?1 and d.order_state = ?2 and d.pickup_contact = ?3", nativeQuery = true)
+    DeliveryOrder findByBarcodeAndOrderStateAndPickupContact(String barcode, String orderState, String pickupContact);
 }

@@ -17,20 +17,24 @@ public class Merchant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name = "user_id")
     private Integer userId;
 
+    @Column(name = "email")
     private String email;
 
     private String gender;
 
     private Timestamp birthday;
 
+    @Column(name="is_email_verified")
     private boolean isEmailVerified;
 
     private String state;
 
     private String avatar;
 
+    @Column(name="full_name")
     private String fullName;
 
     private String code;
@@ -44,12 +48,15 @@ public class Merchant {
 
     private String version;
 
-    private Timestamp createAt;
+    @Column(name="created_at")
+    private Timestamp createdAt;
 
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
 
+    @Column(name="last_order_at")
     private Timestamp lastOrderAt;
 
+    @Column(name="first_order_at")
     private Timestamp firstOrderAt;
 
     public Integer getId() {
@@ -164,20 +171,20 @@ public class Merchant {
         this.version = version;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Timestamp createAt) {
+        this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdateAt() {
-        return updateAt;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public Timestamp getLastOrderAt() {

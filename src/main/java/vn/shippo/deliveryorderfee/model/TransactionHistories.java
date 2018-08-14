@@ -11,35 +11,48 @@ public class TransactionHistories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String barCode;
+    private String barcode;
 
-    private Integer merchantId;
+    @Column(name="completed_by")
+    private Integer completedBy;
 
-    private Float finalMechantBalance;
+    @Column(name="created_at")
+    private Timestamp createdAt;
 
-    private Float transAmount;
-
-    private String transType;
-
-    private String privateNote;
-
-    private String transDetail;
-
-    private String objectType;
-
-    private Integer objectId;
-
+    @Column(name="created_by")
     private Integer createdBy;
 
-    private Integer complateBy;
+    @Column(name="final_merchant_balance")
+    private double finalMerchantBalance;
 
-    private String recodeId;
+    @Column(name="merchant_id")
+    private Integer merchantId;
+
+    @Column(name="object_id")
+    private Integer objectId;
+
+    @Column(name="object_type")
+    private String objectType;
+
+    @Column(name="private_note")
+    private String privateNote;
+
+    @Column(name="record_id")
+    private Integer recordId;
+
+    @Column(name="trans_amount")
+    private double transAmount;
+
+    @Column(name="trans_detail")
+    private String transDetail;
+
+    @Column(name="trans_type")
+    private String transType;
+
+    @Column(name="updated_at")
+    private Timestamp updatedAt;
 
     private Integer version;
-
-    private Timestamp createAt;
-
-    private Timestamp updateAt;
 
     public TransactionHistories(){}
 
@@ -51,12 +64,12 @@ public class TransactionHistories {
         this.id = id;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getBarcode() {
+        return barcode;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public Integer getMerchantId() {
@@ -67,32 +80,12 @@ public class TransactionHistories {
         this.merchantId = merchantId;
     }
 
-    public Float getFinalMechantBalance() {
-        return finalMechantBalance;
-    }
-
-    public void setFinalMechantBalance(Float finalMechantBalance) {
-        this.finalMechantBalance = finalMechantBalance;
-    }
-
     public void setTransAmount(Float transAmount) {
         this.transAmount = transAmount;
     }
 
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
-    }
-
-    public void setComplateBy(Integer complateBy) {
-        this.complateBy = complateBy;
-    }
-
-    public String getRecodeId() {
-        return recodeId;
-    }
-
-    public void setRecodeId(String recodeId) {
-        this.recodeId = recodeId;
     }
 
     public String getTransType() {
@@ -143,41 +136,55 @@ public class TransactionHistories {
         this.version = version;
     }
 
-    public Timestamp getCreateAt() {
-        return createAt;
+    public Integer getCompletedBy() {
+        return completedBy;
     }
 
-    public void setCreateAt(Timestamp createAt) {
-        this.createAt = createAt;
+    public void setCompletedBy(Integer completedBy) {
+        this.completedBy = completedBy;
     }
 
-    public Timestamp getUpdateAt() {
-        return updateAt;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    @Override
-    public String toString() {
-        return "TransactionHistories{" +
-                "id=" + id +
-                ", barCode='" + barCode + '\'' +
-                ", merchantId=" + merchantId +
-                ", finalMechantBalance=" + finalMechantBalance +
-                ", transAmount=" + transAmount +
-                ", transType='" + transType + '\'' +
-                ", privateNote='" + privateNote + '\'' +
-                ", transDetail='" + transDetail + '\'' +
-                ", objectType='" + objectType + '\'' +
-                ", objectId=" + objectId +
-                ", createdBy=" + createdBy +
-                ", complateBy=" + complateBy +
-                ", recodeId='" + recodeId + '\'' +
-                ", version=" + version +
-                ", createAt=" + createAt +
-                ", updateAt=" + updateAt +
-                '}';
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public double getFinalMerchantBalance() {
+        return finalMerchantBalance;
+    }
+
+    public void setFinalMerchantBalance(double finalMerchantBalance) {
+        this.finalMerchantBalance = finalMerchantBalance;
+    }
+
+    public Integer getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
+    }
+
+    public double getTransAmount() {
+        return transAmount;
+    }
+
+    public void setTransAmount(double transAmount) {
+        this.transAmount = transAmount;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

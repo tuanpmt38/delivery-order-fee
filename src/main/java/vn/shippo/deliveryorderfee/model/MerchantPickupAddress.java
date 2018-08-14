@@ -19,29 +19,40 @@ public class MerchantPickupAddress implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name="is_deleted")
     private Integer isDeleted;
 
+    @Column(name="created_by")
     private String createdBy;
 
+    @Column(name="merchant_id")
     private Integer merchantId;
 
-    private String pickupDetailAddress;
+    @Column(name="detail_address")
+    private String detailAddress;
 
-    private Integer pickupLocationIdsPath;
+    @Column(name="contact_name")
+    private String contactName;
 
-    private String pickupContactName;
+    @Column(name="contact_phone")
+    private String contactPhone;
 
-    private String pickupContactPhone;
+    @Column(name="full_address")
+    private String fullAddress;
 
-    private String pickupFullAddress;
+    @Column(name="location_ids_path")
+    private Integer locationIdsPath;
 
-    private String pickupLocationNamePath;
+    @Column(name="location_names_path")
+    private String locationNamesPath;
 
     private Integer version;
 
+    @Column(name="created_at")
     private Timestamp createdAt;
 
-    private Timestamp updateAt;
+    @Column(name="updated_at")
+    private Timestamp updatedAt;
 
     public MerchantPickupAddress(){}
 
@@ -77,52 +88,52 @@ public class MerchantPickupAddress implements Serializable {
         this.merchantId = merchantId;
     }
 
-    public String getPickupDetailAddress() {
-        return pickupDetailAddress;
+    public String getDetailAddress() {
+        return detailAddress;
     }
 
-    public void setPickupDetailAddress(String pickupDetailAddress) {
-        this.pickupDetailAddress = pickupDetailAddress;
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 
-    public Integer getPickupLocationIdsPath() {
-        return pickupLocationIdsPath;
+    public String getContactName() {
+        return contactName;
     }
 
-    public void setPickupLocationIdsPath(Integer pickupLocationIdsPath) {
-        this.pickupLocationIdsPath = pickupLocationIdsPath;
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
     }
 
-    public String getPickupContactName() {
-        return pickupContactName;
+    public String getContactPhone() {
+        return contactPhone;
     }
 
-    public void setPickupContactName(String pickupContactName) {
-        this.pickupContactName = pickupContactName;
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 
-    public String getPickupContactPhone() {
-        return pickupContactPhone;
+    public String getFullAddress() {
+        return fullAddress;
     }
 
-    public void setPickupContactPhone(String pickupContactPhone) {
-        this.pickupContactPhone = pickupContactPhone;
+    public void setFullAddress(String fullAddress) {
+        this.fullAddress = fullAddress;
     }
 
-    public String getPickupFullAddress() {
-        return pickupFullAddress;
+    public Integer getLocationIdsPath() {
+        return locationIdsPath;
     }
 
-    public void setPickupFullAddress(String pickupFullAddress) {
-        this.pickupFullAddress = pickupFullAddress;
+    public void setLocationIdsPath(Integer locationIdsPath) {
+        this.locationIdsPath = locationIdsPath;
     }
 
-    public String getPickupLocationNamePath() {
-        return pickupLocationNamePath;
+    public String getLocationNamesPath() {
+        return locationNamesPath;
     }
 
-    public void setPickupLocationNamePath(String pickupLocationNamePath) {
-        this.pickupLocationNamePath = pickupLocationNamePath;
+    public void setLocationNamesPath(String locationNamesPath) {
+        this.locationNamesPath = locationNamesPath;
     }
 
     public Integer getVersion() {
@@ -141,30 +152,11 @@ public class MerchantPickupAddress implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdateAt() {
-        return updateAt;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Timestamp updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    @Override
-    public String toString() {
-        return "MerchantPickupAddress{" +
-                "id=" + id +
-                ", isDeleted=" + isDeleted +
-                ", createdBy='" + createdBy + '\'' +
-                ", merchantId=" + merchantId +
-                ", pickupDetailAddress='" + pickupDetailAddress + '\'' +
-                ", pickupLocationIdsPath='" + pickupLocationIdsPath + '\'' +
-                ", pickupContactName='" + pickupContactName + '\'' +
-                ", pickupContactPhone='" + pickupContactPhone + '\'' +
-                ", pickupFullAddress='" + pickupFullAddress + '\'' +
-                ", pickupLocationNamePath='" + pickupLocationNamePath + '\'' +
-                ", version=" + version +
-                ", createdAt=" + createdAt +
-                ", updateAt=" + updateAt +
-                '}';
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
