@@ -60,11 +60,11 @@ public class MerchantPickupAddressController {
         logger.info("Get all merchant pickup address "+merchantPickupAddress);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("total :", merchantPickupAddress.size());
-        map.put("addresses:", merchantPickupAddress);
+        map.put("addresses :", merchantPickupAddress);
         return ResponseEntity.ok(map);
     }
 
-    @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.GET, produces = {"application/hal+json"})
+    @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.GET, produces = {"application/json"})
     public ResponseEntity<MerchantPickupAddress> getMerchantPickupAddressById(@PathVariable("id") Integer id)  {
 
         logger.info("Fetching merchant pickup address with id: "+ id);
@@ -80,7 +80,7 @@ public class MerchantPickupAddressController {
     public ResponseEntity<Void> createMerchantPickupAddress(@RequestBody MerchantPickupAddress merchantPickupAddress, UriComponentsBuilder builder){
 
         merchantPickupAddressService.save(merchantPickupAddress);
-        logger.info("Creating merchant pickup address : {}", merchantPickupAddress);
+        logger.info("Created merchant pickup address : {}", merchantPickupAddress);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(builder.path("/pickup_address/{id}").buildAndExpand(merchantPickupAddress.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -107,10 +107,10 @@ public class MerchantPickupAddressController {
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<MerchantPickupAddress> deleteMerchantPickupAddress(@PathVariable ("id") Integer id){
 
-        logger.info("Fetching and deleting pickup address with id: "+id);
         Optional<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findById(id);
         merchantPickupAddress.get().setIsDeleted(IS_DELETED);
         merchantPickupAddressService.save(merchantPickupAddress.get());
+        logger.info("Fetching and deleted pickup address with id: "+id+" done");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

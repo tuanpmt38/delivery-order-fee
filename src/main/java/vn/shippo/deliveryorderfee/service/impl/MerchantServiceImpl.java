@@ -6,6 +6,7 @@ import vn.shippo.deliveryorderfee.model.Merchant;
 import vn.shippo.deliveryorderfee.repository.MerchantRepository;
 import vn.shippo.deliveryorderfee.service.MerchantService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,10 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public Optional<Merchant> findById(Integer id) {
         return merchantRepository.findById(id);
+    }
+
+    @Override
+    public List<Merchant> findAll() {
+        return (List<Merchant>) merchantRepository.findAll();
     }
 }

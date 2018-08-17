@@ -53,7 +53,7 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info(ex.getClass().getName());
         logger.error("error", ex);
         //
-        final ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, "abc", "error occurred");
+        final ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, "No value present", "Data not found !");
         return new ResponseEntity<Object>(errorMessage, new HttpHeaders(), errorMessage.getStatus());
     }
 }

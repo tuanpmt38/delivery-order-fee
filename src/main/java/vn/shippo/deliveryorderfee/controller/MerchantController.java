@@ -10,6 +10,7 @@ import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import vn.shippo.deliveryorderfee.model.Merchant;
 import vn.shippo.deliveryorderfee.service.MerchantService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,6 +23,16 @@ public class MerchantController {
     @Autowired
     public MerchantController(MerchantService merchantService){
         this.merchantService = merchantService;
+    }
+
+    @RequestMapping(value = "/merchant", method = RequestMethod.GET)
+    public ResponseEntity<List<Merchant>> getAllMerchant(){
+        List<Merchant> merchants = merchantService.findAll();
+        logger.info("Get all merchant ");
+        if(merchants.isEmpty()){
+            return new ResponseEntity<List<Merchant>>( HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Merchant>>(merchants, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/merchant/{id}", method = RequestMethod.PUT)
@@ -38,7 +49,7 @@ public class MerchantController {
         currentMerchant.get().setGender(merchant.getGender());
         currentMerchant.get().setMobile(merchant.getMobile());
         merchantService.save(currentMerchant.get());
-        logger.info("Result edit current merchant: " +currentMerchant);
+        logger.info("Result edit current merchant: " +currentMerchant+ " done");
         return new ResponseEntity<Merchant>(currentMerchant.get(), HttpStatus.OK);
     }
 }

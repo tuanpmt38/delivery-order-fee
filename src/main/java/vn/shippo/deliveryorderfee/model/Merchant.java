@@ -41,7 +41,8 @@ public class Merchant {
 
     private String mobile;
 
-    private float realBalance;
+    @Column(name="real_Balance")
+    private double realBalance;
 
     @JsonProperty("banks")
     private String banks;
@@ -147,11 +148,11 @@ public class Merchant {
         this.mobile = mobile;
     }
 
-    public float getRealBalance() {
+    public double getRealBalance() {
         return realBalance;
     }
 
-    public void setRealBalance(float realBalance) {
+    public void setRealBalance(double realBalance) {
         this.realBalance = realBalance;
     }
 
