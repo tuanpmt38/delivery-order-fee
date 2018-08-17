@@ -1,5 +1,7 @@
 package vn.shippo.deliveryorderfee.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -11,7 +13,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="delivery_order")
-//@NamedQuery(name="DeliveryOrder.findAll", query="SELECT d FROM DeliveryOrder d")
+@NamedQuery(name="DeliveryOrder.findAll", query="SELECT d FROM DeliveryOrder d")
 public class DeliveryOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -68,7 +70,9 @@ public class DeliveryOrder implements Serializable {
     @Column(name = "export_warehouse_at")
     private Timestamp exportWarehouseAt;
 
-//    private Object features;
+    @JsonProperty
+    @Column(name = "features")
+    private String features;
 
     private String goods;
 
@@ -122,7 +126,9 @@ public class DeliveryOrder implements Serializable {
 
     private String state;
 
-//    private Object timeline;
+    @JsonProperty
+    @Column(name = "timeline")
+    private Timestamp timeline;
 
     @Column(name = "total_fee")
     private double totalFee;
@@ -482,5 +488,21 @@ public class DeliveryOrder implements Serializable {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public String getFeatures() {
+        return features;
+    }
+
+    public void setFeatures(String features) {
+        this.features = features;
+    }
+
+    public Timestamp getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(Timestamp timeline) {
+        this.timeline = timeline;
     }
 }

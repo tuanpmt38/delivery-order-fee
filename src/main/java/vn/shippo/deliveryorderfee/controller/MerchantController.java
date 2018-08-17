@@ -27,10 +27,10 @@ public class MerchantController {
     @RequestMapping(value = "/merchant/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Merchant> updateMerchant(@PathVariable("id") Integer id, @RequestBody Merchant merchant){
 
-        logger.info("Fetching and update merchant with id "+ id);
+        logger.info("Fetching and update merchant with id: "+ id);
         Optional<Merchant> currentMerchant = merchantService.findById(id);
         if(!currentMerchant.isPresent()){
-            logger.info("Current merchant with id "+id+" not found");
+            logger.info("Current merchant with id: "+ id +" not found");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
         currentMerchant.get().setFullName(merchant.getFullName());
@@ -38,7 +38,7 @@ public class MerchantController {
         currentMerchant.get().setGender(merchant.getGender());
         currentMerchant.get().setMobile(merchant.getMobile());
         merchantService.save(currentMerchant.get());
-        logger.info("Result edit current merchant " +currentMerchant);
+        logger.info("Result edit current merchant: " +currentMerchant);
         return new ResponseEntity<Merchant>(currentMerchant.get(), HttpStatus.OK);
     }
 }

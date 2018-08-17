@@ -1,5 +1,6 @@
 package vn.shippo.deliveryorderfee.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 import java.io.Serializable;
@@ -34,6 +35,7 @@ public class AuditOrderFile implements Serializable {
     private String message;
 
     @Column(name="metadata")
+    @JsonProperty
     private String metadata;
 
     @Column(name="order_id")

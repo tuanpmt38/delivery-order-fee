@@ -8,12 +8,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import vn.shippo.deliveryorderfee.repository.TransactionHistoriesRepository;
 import vn.shippo.deliveryorderfee.service.TransactionHistoriesService;
 
-@Controller
-@RequestMapping("/api")
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+
+@RestController
 public class TransactionHistoriesController {
 
     private TransactionHistoriesService transactionHistoriesService;
@@ -25,23 +31,23 @@ public class TransactionHistoriesController {
         this.transactionHistoriesService = transactionHistoriesService;
     }
 
-//    @RequestMapping(value = "/CustomerTransactions", method = RequestMethod.GET)
-//    public ResponseEntity<List<TransactionHistories>> getCustomerTransactions(){
-//
-//        List<TransactionHistories> transectionHistories = transectionHistoriesService.findAll();
-//        if(transectionHistories.isEmpty()){
-//            return new ResponseEntity<List<TransactionHistories>>( HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<TransactionHistories>>(transectionHistories, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/customer_transactions/", method = RequestMethod.GET)
+    public ResponseEntity<List<TransactionHistories>> getAllCustomerTransactions(){
 
-    @RequestMapping(value = "/customertransactions", method = RequestMethod.GET)
-    public ResponseEntity<Page<TransactionHistories>> getCustomerTransactions(Pageable pageable){
-
-        Page<TransactionHistories> transactionHistories = transactionHistoriesService.findAll(pageable);
-        System.out.printf("list transaction:"+ transactionHistories);
-
-        return new ResponseEntity<Page<TransactionHistories>>(transactionHistories, HttpStatus.OK);
+        List<TransactionHistories> transactionHistories = transactionHistoriesService.findAll();
+        if(transactionHistories.isEmpty()){
+            return new ResponseEntity<List<TransactionHistories>>( HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<TransactionHistories>>(transactionHistories, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/transactions", method = RequestMethod.GET)
+    public ResponseEntity<List<TransactionHistories>> getCustomerTransaction(
+            @RequestParam("barcode") String barcode, @RequestParam("transtype") String transType){
+        List<TransactionHistories> transactionHistories = transactionHistoriesService.findByBarcodeAndTransType(barcode, transType);
+        if(transactionHistories.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(transactionHistories, HttpStatus.OK);
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,17 +19,18 @@ import vn.shippo.deliveryorderfee.model.DeliveryOrderFee;
 import vn.shippo.deliveryorderfee.model.MerchantPickupAddress;
 import vn.shippo.deliveryorderfee.service.MerchantPickupAddressService;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @Controller
-@RequestMapping("/api")
 public class MerchantPickupAddressController {
 
     private static final Logger logger = LogManager.getLogger(DeliveryOrderFee.class);
-
-//    @Autowired private EntityLinks links;
+    public static final int IS_DELETED = 1;
 
     private MerchantPickupAddressService merchantPickupAddressService;
 
@@ -39,25 +39,35 @@ public class MerchantPickupAddressController {
         this.merchantPickupAddressService = merchantPickupAddressService;
     }
 
+//    @RequestMapping(value = "/pickup_address", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<PagedResources<MerchantPickupAddress>> getMerchantPickupAddress(Pageable pageable, PagedResourcesAssembler assembler) {
+//
+//        Page<MerchantPickupAddress> merchantPickupAddressPage = merchantPickupAddressService.findAll(pageable);
+//        logger.info("Page Merchant pickup address: " + merchantPickupAddressPage);
+//        PagedResources < MerchantPickupAddress > pickupAddressPagedResources = assembler.toResource(merchantPickupAddressPage,
+//                linkTo(MerchantPickupAddressController.class).slash("/pickup_address").withSelfRel());
+//
+//        return new ResponseEntity < > (assembler.toResource(merchantPickupAddressPage,
+//                linkTo(MerchantPickupAddressController.class).slash("/pickup_address").withSelfRel()), HttpStatus.OK);
+//
+////        return new ResponseEntity<>(merchantPickupAddressPage, HttpStatus.OK);
+//    }
+
     @RequestMapping(value = "/pickup_address", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PagedResources<MerchantPickupAddress>> getMerchantPickupAddress(Pageable pageable, PagedResourcesAssembler assembler) {
+    public ResponseEntity<Map<String, Object>> getMerchantPickupAddress(){
 
-        Page<MerchantPickupAddress> merchantPickupAddressPage = merchantPickupAddressService.findAll(pageable);
-        logger.info("Page Merchant pickup address: " + merchantPickupAddressPage);
-        PagedResources < MerchantPickupAddress > pickupAddressPagedResources = assembler.toResource(merchantPickupAddressPage,
-                linkTo(MerchantPickupAddressController.class).slash("/pickup_address").withSelfRel());
-
-        return new ResponseEntity < > (assembler.toResource(merchantPickupAddressPage,
-                linkTo(MerchantPickupAddressController.class).slash("/pickup_address").withSelfRel()), HttpStatus.OK);
-
-//        return new ResponseEntity<>(merchantPickupAddressPage, HttpStatus.OK);
+        List<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findAll();
+        logger.info("Get all merchant pickup address "+merchantPickupAddress);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("total :", merchantPickupAddress.size());
+        map.put("addresses:", merchantPickupAddress);
+        return ResponseEntity.ok(map);
     }
-
 
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.GET, produces = {"application/hal+json"})
     public ResponseEntity<MerchantPickupAddress> getMerchantPickupAddressById(@PathVariable("id") Integer id)  {
 
-        logger.info("Merchant pickup address by id: "+ id);
+        logger.info("Fetching merchant pickup address with id: "+ id);
         Optional<MerchantPickupAddress> pickupAddress = merchantPickupAddressService.findById(id);
         logger.info("Result pickup address: " + pickupAddress);
         if(!pickupAddress.isPresent()){
@@ -82,7 +92,7 @@ public class MerchantPickupAddressController {
         logger.info("Fetching and update pickup address with id = "+id);
         Optional<MerchantPickupAddress> currentMerchantPickupAddress = merchantPickupAddressService.findById(id);
         if(!currentMerchantPickupAddress.isPresent()){
-            logger.info("pickup address with "+ id +"not found");
+            logger.info("Pickup address with id: "+ id +" not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         currentMerchantPickupAddress.get().setContactName(pickupAddress.getContactName());
@@ -97,9 +107,9 @@ public class MerchantPickupAddressController {
     @RequestMapping(value = "/pickup_address/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<MerchantPickupAddress> deleteMerchantPickupAddress(@PathVariable ("id") Integer id){
 
-        logger.info("Fetching and deleting pickup address with id ="+id);
+        logger.info("Fetching and deleting pickup address with id: "+id);
         Optional<MerchantPickupAddress> merchantPickupAddress = merchantPickupAddressService.findById(id);
-        merchantPickupAddress.get().setIsDeleted(1);
+        merchantPickupAddress.get().setIsDeleted(IS_DELETED);
         merchantPickupAddressService.save(merchantPickupAddress.get());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

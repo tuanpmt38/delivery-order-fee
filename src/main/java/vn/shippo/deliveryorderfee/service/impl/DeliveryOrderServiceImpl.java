@@ -6,6 +6,7 @@ import vn.shippo.deliveryorderfee.model.DeliveryOrder;
 import vn.shippo.deliveryorderfee.repository.DeliveryOrderRepository;
 import vn.shippo.deliveryorderfee.service.DeliveryOrderService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +27,10 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @Override
     public DeliveryOrder findByBarcode(String barcode ) {
         return deliveryOrderRepository.findByBarcode(barcode);
+    }
+
+    @Override
+    public Iterable<DeliveryOrder> findAll() {
+        return deliveryOrderRepository.findAll();
     }
 }

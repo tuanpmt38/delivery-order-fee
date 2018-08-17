@@ -27,22 +27,26 @@ public class DeliveryOrderController {
         this.deliveryOrderService = deliveryOrderService;
     }
 
-    @RequestMapping(value = "/deliveryorder/tl/{barcode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delivery_order/tl/{barcode}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, DeliveryOrder>> getDeliveryOrderByBarcode(@PathVariable("barcode") String barcode){
 
-        logger.info("Fetching and result with " + barcode);
-        DeliveryOrder deliveryOrder = deliveryOrderService.findByBarcode(barcode);
-        logger.info("delivery order " + deliveryOrder);
         Map<String, DeliveryOrder> map=new HashMap<>();
+        logger.info("Fetching and delivery order with barcode: " + barcode);
+        DeliveryOrder deliveryOrder = deliveryOrderService.findByBarcode(barcode);
+        if(deliveryOrder.getBarcode().isEmpty()){
+            return (ResponseEntity<Map<String, DeliveryOrder>>) ResponseEntity.status(HttpStatus.NOT_FOUND);
+
+        }
+        logger.info("delivery order: " + deliveryOrder);
         map.put("result",deliveryOrder);
 
         return  ResponseEntity.ok(map);
     }
 
-    @RequestMapping(value = "/deliveryorder/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delivery_order/{id}", method = RequestMethod.GET)
     public ResponseEntity<Map<String, Optional<DeliveryOrder>>> getDeliverOrderById(@PathVariable("id") Integer id){
 
-        logger.info("Fetching and result with " +id);
+        logger.info("Fetching and result delivery order with " +id);
         Optional<DeliveryOrder> deliveryOrder = deliveryOrderService.findById(id);
         if(!deliveryOrder.isPresent()){
             return new ResponseEntity(deliveryOrder.get(),HttpStatus.NO_CONTENT);

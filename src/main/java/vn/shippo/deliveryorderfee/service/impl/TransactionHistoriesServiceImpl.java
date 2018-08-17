@@ -1,8 +1,6 @@
 package vn.shippo.deliveryorderfee.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.shippo.deliveryorderfee.model.TransactionHistories;
 import vn.shippo.deliveryorderfee.repository.TransactionHistoriesRepository;
@@ -26,12 +24,22 @@ public class TransactionHistoriesServiceImpl implements TransactionHistoriesServ
     }
 
     @Override
-    public Page<TransactionHistories> findAll(Pageable pageable) {
-        return transactionHistoriesRepository.findAll(pageable);
+    public List<TransactionHistories> findByBarcode(String barcode) {
+        return transactionHistoriesRepository.findByBarcode(barcode);
     }
 
     @Override
-    public TransactionHistories findByTransTypeAndCreateAt(String transType, Timestamp createAt) {
-        return transactionHistoriesRepository.findByTransTypeAndCreateAt(transType, createAt);
+    public List<TransactionHistories> findByAllCreatedAtBetween(Timestamp createAt) {
+        return transactionHistoriesRepository.findAllByCreatedAtBetween(createAt);
+    }
+
+    @Override
+    public List<TransactionHistories> findAllByTransType(String transType) {
+        return transactionHistoriesRepository.findAllByTransType(transType);
+    }
+
+    @Override
+    public List<TransactionHistories> findByBarcodeAndTransType(String barcode, String transType) {
+        return transactionHistoriesRepository.findByBarcodeAndTransType(barcode,transType);
     }
 }

@@ -1,7 +1,5 @@
 package vn.shippo.deliveryorderfee.service;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import vn.shippo.deliveryorderfee.model.TransactionHistories;
 
 import java.sql.Timestamp;
@@ -11,9 +9,13 @@ public interface TransactionHistoriesService {
 
     List<TransactionHistories> findAll();
 
-    Page<TransactionHistories> findAll(Pageable pageable);
+    List<TransactionHistories> findByBarcode(String barcode);
 
-    TransactionHistories findByTransTypeAndCreateAt(String transType, Timestamp createAt);
+    List<TransactionHistories> findByAllCreatedAtBetween(Timestamp createAt);
+
+    List<TransactionHistories> findAllByTransType(String transType);
+
+    List<TransactionHistories> findByBarcodeAndTransType(String barcode, String transType);
 
 
 }

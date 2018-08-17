@@ -12,6 +12,8 @@ import java.util.List;
 @Repository
 public interface MerchantPickupAddressRepository extends PagingAndSortingRepository<MerchantPickupAddress, Integer> {
 
+    @Query(value = "select * from merchant_pickup_address m where m.is_deleted = 0", nativeQuery = true)
+    Page<MerchantPickupAddress> findAll(Pageable pageable);
     @Query(value = "select * from merchant_pickup_address m where m.pickup_contact_name = ?1 " +
             "and m.pickup_contact_phone = ?2",nativeQuery = true)
     MerchantPickupAddress findAllByPickupContactNameAndPickupContactPhone(String pickupContactName, String pickupContactPhone);
